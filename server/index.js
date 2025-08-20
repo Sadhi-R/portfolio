@@ -119,9 +119,8 @@ app.get('/api/health', (req, res) => {
 const distPath = path.resolve(__dirname, '../dist');
 if (fs.existsSync(distPath)) {
   app.use(express.static(distPath));
-  // React Router catch-all (only for non-API routes)
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api')) return next();
+  // React Router catch-all for non-API GETs (Express 5-safe using RegExp)
+  app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
   });
 } else {
