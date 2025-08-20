@@ -70,14 +70,4 @@ src/
 - Modify colors and styles in `tailwind.config.js`
 - Edit content in respective component files
 
-## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📧 Contact
-
-For any questions or suggestions, please reach out through the contact form on the website.
