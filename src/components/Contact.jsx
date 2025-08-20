@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
+// emailjs removed; using local API via Nodemailer/Gmail SMTP
 
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
@@ -27,41 +27,55 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Sadhi Ramtenki",
-          from_email: form.email,
-          to_email: "sadhiramtenki@gmail.com",
-          message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+    // HTML5 constraint validation first
+    if (formRef.current && !formRef.current.checkValidity()) {
+      setLoading(false);
+      formRef.current.reportValidity();
+      return;
+    }
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      message: form.message.trim(),
+    };
 
-          alert("Ahh, something went wrong. Please try again.");
-        }
-      );
+    // Simple email regex as an extra safeguard
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(payload.email)) {
+      setLoading(false);
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        let msg = "Request failed";
+        try {
+          const data = await res.json();
+          if (data?.error) msg = data.error;
+        } catch {}
+        throw new Error(msg);
+      }
+
+      setLoading(false);
+      alert("Thank you. I will get back to you as soon as possible.");
+      setForm({ name: "", email: "", message: "" });
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      alert(error?.message || "Ahh, something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -88,6 +102,10 @@ const Contact = () => {
               value={form.name}
               onChange={handleChange}
               placeholder="What's your good name?"
+              required
+              minLength={2}
+              maxLength={120}
+              autoComplete='name'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
@@ -98,7 +116,10 @@ const Contact = () => {
               name='email'
               value={form.email}
               onChange={handleChange}
-              placeholder="What's your web address?"
+              placeholder="What's your email address?"
+              required
+              inputMode='email'
+              autoComplete='email'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
@@ -110,6 +131,9 @@ const Contact = () => {
               value={form.message}
               onChange={handleChange}
               placeholder='What you want to say?'
+              required
+              minLength={5}
+              maxLength={5000}
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
