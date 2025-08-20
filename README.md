@@ -20,7 +20,7 @@ A modern, interactive 3D portfolio website built with React, Three.js, and Frame
 - Framer Motion
 - TailwindCSS
 - Vite
-- Gmail SMTP (via Nodemailer) or EmailJS for contact form
+- Gmail SMTP (via Nodemailer) contact form API
 
 ## 📦 Installation
 
@@ -48,6 +48,22 @@ npm run dev
 npm run build
 ```
 Then deploy `dist/` as static assets and deploy `server/index.js` as a Node service.
+If you run the API on a different host/path, set `VITE_API_URL` accordingly (e.g., `https://yourdomain.com/api`).
+
+### Deploying on Render (single service)
+
+- Service Type: Web Service, Runtime: Node
+- Build Command:
+	- `npm ci`
+	- `npm run build`
+- Start Command:
+	- `npm start`
+
+The server serves the built frontend from `dist/` and exposes API under `/api`. Set environment variables in Render Dashboard:
+- `PORT` (Render provides one automatically; no need to set unless customizing)
+- `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `TO_EMAIL` (and optional CC/BCC)
+- `CORS_ORIGINS` to your frontend URL if you also access API from another origin
+- Leave `VITE_API_URL` empty to use the same-origin `/api` in production
 
 ## 🔧 Environment Setup
 
@@ -60,15 +76,13 @@ Two options for contact form:
 	- TO_EMAIL=recipient1@example.com, recipient2@example.com (optional; defaults to GMAIL_USER)
 	- Optional: CC_EMAILS=copy1@example.com;copy2@example.com, BCC_EMAILS=archive@example.com
 - Start servers:
-	- `npm run server` (email API at http://localhost:3001)
-	- In another terminal: `npm run dev` (frontend at http://localhost:5173)
+		- `npm run server` (email API at http://localhost:3001)
+		- In another terminal: `npm run dev` (frontend at http://localhost:5173)
+	Optional: configure CORS allowed origins via `CORS_ORIGINS` (comma/semicolon/space separated) in `.env`.
 
-2) EmailJS (no server)
-- Create a `.env` file in the root directory and add:
-	- VITE_APP_EMAILJS_PUBLIC_KEY=...
-	- VITE_APP_EMAILJS_SERVICE_ID=...
-	- VITE_APP_EMAILJS_TEMPLATE_ID=...
-	- Update `Contact.jsx` to use EmailJS (currently it posts to /api/contact).
+2) API base URL
+- By default, the client posts to `/api` so it works behind Nginx or the Vite dev proxy.
+- To target a different origin (e.g., hosted API), set `VITE_API_URL` in `.env` to the full base, e.g. `https://api.yourdomain.com/api`.
 
 ## 📁 Project Structure
 
@@ -127,11 +141,13 @@ Validation
 
 From `.env.example` (copy to `.env`):
 - PORT: server port (default 3001)
+- CORS_ORIGINS: allowed origins list for CORS (comma/semicolon/space separated); defaults to allow-all in dev
+- CORS_METHODS, CORS_HEADERS: optional CORS overrides
 - GMAIL_USER: Gmail address used to send
 - GMAIL_APP_PASSWORD: Google App Password for that account (no spaces)
 - TO_EMAIL: one or more recipients (comma/semicolon separated). Falls back to GMAIL_USER if empty
 - CC_EMAILS, BCC_EMAILS: optional CC/BCC lists
-- VITE_APP_EMAILJS_*: only needed if you switch back to EmailJS
+- VITE_API_URL: client API base (leave empty if using `/api` behind proxy)
 
 ## 📄 Asset Credits & Licenses
 

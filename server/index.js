@@ -6,12 +6,27 @@
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// CORS configuration: allow specific origins from env or all in dev
+const corsOrigins = (process.env.CORS_ORIGINS || '')
+  .split(/[,;\s]+/)
+  .map((s) => s.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: corsOrigins.length ? corsOrigins : true,
+    methods: process.env.CORS_METHODS || 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: process.env.CORS_HEADERS || undefined,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const hasGmailCreds = !!(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
@@ -99,6 +114,19 @@ app.post('/api/contact', async (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, smtp: hasGmailCreds ? 'gmail' : 'dev-stream' });
 });
+
+// Serve frontend build (if present). On Render, build runs before start, so dist exists.
+const distPath = path.resolve(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  // React Router catch-all (only for non-API routes)
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+} else {
+  console.warn('Static frontend not found at', distPath, '- skipping static hosting');
+}
 
 app.listen(PORT, () => {
   console.log(`Email API server listening on http://localhost:${PORT}`);

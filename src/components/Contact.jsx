@@ -17,6 +17,9 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false);
 
+  // Resolve API base from env (VITE_API_URL) or default to "/api" for Nginx/proxy setups
+  const apiBase = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
+
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
@@ -53,7 +56,7 @@ const Contact = () => {
     }
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${apiBase}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
