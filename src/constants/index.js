@@ -29,19 +29,22 @@ import {
   rewahrproject,
   syllabusmanagemenProject,
   LeadProject,
-  rmsProject,  
+  rmsProject,
   digitalMenu,
   CaseManagementSystem,
-  ServiceEdge
-} from '../assets'
+  ServiceEdge,
+} from "../assets";
 
-// Import Tekisky separately
 import tekisky from "../assets/company/tekisky.png";
 
 export const navLinks = [
   {
     id: "about",
     title: "About",
+  },
+  {
+    id: "hire",
+    title: "Hire Me",
   },
   {
     id: "work",
@@ -72,7 +75,7 @@ const services = [
   },
 ];
 
-import flutter from '../assets/tech/flutter.png';
+import flutter from "../assets/tech/flutter.png";
 const technologies = [
   {
     name: "HTML",
@@ -187,7 +190,7 @@ const projects = [
     tags: [],
     image: d3eproject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "RewaHR – HR Management Portal",
@@ -196,7 +199,7 @@ const projects = [
     tags: [],
     image: rewahrproject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "Lead Management System",
@@ -205,7 +208,7 @@ const projects = [
     tags: [],
     image: LeadProject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "FindNok – Next of Kin Web App",
@@ -214,7 +217,7 @@ const projects = [
     tags: [],
     image: findNOK,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "Hostel Management App",
@@ -223,7 +226,7 @@ const projects = [
     tags: [],
     image: hostelproproject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "Restaurant Management System",
@@ -232,7 +235,7 @@ const projects = [
     tags: [],
     image: rmsProject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "Syllabus Management System",
@@ -241,7 +244,7 @@ const projects = [
     tags: [],
     image: syllabusmanagemenProject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "ServiceEdge – Home Service Booking App",
@@ -250,7 +253,7 @@ const projects = [
     tags: [],
     image: ServiceEdge,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "Case Management System",
@@ -259,7 +262,7 @@ const projects = [
     tags: [],
     image: CaseManagementSystem,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "DWS Event Sphere – Event Calendar App",
@@ -268,7 +271,7 @@ const projects = [
     tags: [],
     image: eventSphereProject,
     source_code_link: "https://github.com/",
-    height: "500px"
+    height: "500px",
   },
   {
     name: "Digital Menu Project",
@@ -277,8 +280,8 @@ const projects = [
     tags: [],
     image: digitalMenu,
     source_code_link: "https://github.com/",
-    height: "500px"
-  }
+    height: "500px",
+  },
 ];
 
 export { services, technologies, experiences, projects };

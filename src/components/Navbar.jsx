@@ -5,35 +5,38 @@ import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo, menu, close } from "../assets";
 
-const Navbar = () => {
+const Navbar = ({ theme, onToggleTheme }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 80);
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const themeButton = (
+    <button
+      type='button'
+      onClick={onToggleTheme}
+      aria-label='Toggle theme'
+      className='rounded-full border border-[var(--border-color)] bg-[var(--card-bg)] px-3 py-1.5 text-sm font-semibold text-[var(--text-primary)] transition hover:opacity-90'
+    >
+      {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+    </button>
+  );
+
   return (
     <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
+      className={`${styles.paddingX} fixed top-0 z-30 w-full border-b border-transparent py-4 transition-all duration-300 ${
+        scrolled
+          ? "bg-[var(--surface-bg)]/95 backdrop-blur-md border-[var(--border-color)]"
+          : "bg-transparent"
       }`}
     >
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
+      <div className='mx-auto flex w-full max-w-7xl items-center justify-between gap-4'>
         <Link
           to='/'
           className='flex items-center gap-2'
@@ -42,49 +45,52 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt='logo' className='w-9 h-9 object-contain' />
-          <p className='text-white text-[18px] font-bold cursor-pointer flex '>
-            Sadhi Ramtenki &nbsp;
-            <span className='sm:block hidden'> | Software Engineer</span>
+          <img src={logo} alt='logo' className='h-9 w-9 object-contain' />
+          <p className='flex cursor-pointer text-base font-bold text-[var(--text-primary)] sm:text-lg'>
+            Sadhi Ramtenki <span className='hidden sm:block'>&nbsp;| Software Engineer</span>
           </p>
         </Link>
 
-        <ul className='list-none hidden sm:flex flex-row gap-10'>
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-        </ul>
+        <div className='hidden items-center gap-6 sm:flex'>
+          <ul className='flex list-none flex-row gap-6'>
+            {navLinks.map((nav) => (
+              <li
+                key={nav.id}
+                className={`cursor-pointer text-[16px] font-medium transition ${
+                  active === nav.title ? "text-[var(--text-primary)]" : "text-secondary"
+                } hover:text-[var(--text-primary)]`}
+                onClick={() => setActive(nav.title)}
+              >
+                <a href={`#${nav.id}`}>{nav.title}</a>
+              </li>
+            ))}
+          </ul>
+          {themeButton}
+        </div>
 
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
+        <div className='flex flex-1 justify-end items-center gap-3 sm:hidden'>
+          {themeButton}
           <img
             src={toggle ? close : menu}
             alt='menu'
-            className='w-[28px] h-[28px] object-contain'
-            onClick={() => setToggle(!toggle)}
+            className='h-7 w-7 cursor-pointer object-contain'
+            onClick={() => setToggle((prev) => !prev)}
           />
 
           <div
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+            } absolute right-0 top-16 mx-4 my-2 min-w-[170px] rounded-xl border border-[var(--border-color)] bg-[var(--surface-bg)]/95 p-6 backdrop-blur-md`}
           >
-            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
+            <ul className='flex list-none flex-1 flex-col items-start justify-end gap-4'>
               {navLinks.map((nav) => (
                 <li
                   key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
+                  className={`cursor-pointer text-[16px] font-medium ${
+                    active === nav.title ? "text-[var(--text-primary)]" : "text-secondary"
                   }`}
                   onClick={() => {
-                    setToggle(!toggle);
+                    setToggle(false);
                     setActive(nav.title);
                   }}
                 >

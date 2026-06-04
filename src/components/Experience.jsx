@@ -13,13 +13,17 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const ExperienceCard = ({ experience }) => {
+  const rootStyles = getComputedStyle(document.documentElement);
+  const cardBg = rootStyles.getPropertyValue("--card-bg").trim() || "#1d1836";
+  const textColor = rootStyles.getPropertyValue("--text-primary").trim() || "#fff";
+
   return (
     <VerticalTimelineElement
       contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
+        background: cardBg,
+        color: textColor,
       }}
-      contentArrowStyle={{ borderRight: "7px solid  #232631" }}
+      contentArrowStyle={{ borderRight: `7px solid ${cardBg}` }}
       date={experience.date}
       iconStyle={{ background: experience.iconBg }}
       icon={

@@ -8,6 +8,7 @@ import Works from "./Works";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import AITechnology from './AITechnology';
+import HireMe from "./HireMe";
 
 export {
   Hero,
@@ -18,8 +19,9 @@ export {
   Works,
   Contact,
   CanvasLoader,
-  EarthCanvas, 
-  ComputersCanvas, 
+  EarthCanvas,
+  ComputersCanvas,
   StarsCanvas,
-  AITechnology
+  AITechnology,
+  HireMe,
 };
