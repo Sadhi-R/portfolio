@@ -12,14 +12,17 @@ import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
-const ExperienceCard = ({ experience, cardBg, textColor }) => {
+const ExperienceCard = ({ experience }) => {
   return (
     <VerticalTimelineElement
       contentStyle={{
-        background: cardBg,
-        color: textColor,
+        background: "var(--card-bg)",
+        color: "var(--text-primary)",
+        border: "1px solid var(--border-color)",
+        boxShadow: "0 18px 55px var(--shadow-color)",
+        borderRadius: "8px",
       }}
-      contentArrowStyle={{ borderRight: `7px solid ${cardBg}` }}
+      contentArrowStyle={{ borderRight: "7px solid var(--card-bg)" }}
       date={experience.date}
       iconStyle={{ background: experience.iconBg }}
       icon={
@@ -33,9 +36,9 @@ const ExperienceCard = ({ experience, cardBg, textColor }) => {
       }
     >
       <div>
-        <h3 className='text-white text-[24px] font-bold'>{experience.title}</h3>
+        <h3 className='text-[22px] font-bold text-[var(--text-primary)] sm:text-[24px]'>{experience.title}</h3>
         <p
-          className='text-secondary text-[16px] font-semibold'
+          className='text-secondary text-[15px] font-semibold sm:text-[16px]'
           style={{ margin: 0 }}
         >
           {experience.company_name}
@@ -46,7 +49,7 @@ const ExperienceCard = ({ experience, cardBg, textColor }) => {
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] pl-1 tracking-wider'
+            className='pl-1 text-[14px] leading-6 text-secondary'
           >
             {point}
           </li>
@@ -57,12 +60,6 @@ const ExperienceCard = ({ experience, cardBg, textColor }) => {
 };
 
 const Experience = () => {
-  const rootStyles = getComputedStyle(document.documentElement);
-  const timelineTheme = {
-    cardBg: rootStyles.getPropertyValue("--card-bg").trim() || "#1d1836",
-    textColor: rootStyles.getPropertyValue("--text-primary").trim() || "#fff",
-  };
-
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -74,14 +71,12 @@ const Experience = () => {
         </h2>
       </motion.div>
 
-      <div className='mt-20 flex flex-col'>
+      <div className='mt-12 flex flex-col sm:mt-16'>
         <VerticalTimeline>
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={`experience-${index}`}
               experience={experience}
-              cardBg={timelineTheme.cardBg}
-              textColor={timelineTheme.textColor}
             />
           ))}
         </VerticalTimeline>

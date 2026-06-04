@@ -5,21 +5,39 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #050816;
-  --surface-bg: #0f172a;
-  --card-bg: #151030;
+  color-scheme: dark;
+  --bg-primary: #080a12;
+  --surface-bg: #111827;
+  --surface-soft: #161b29;
+  --card-bg: #151a2c;
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
-  --border-color: rgba(148, 163, 184, 0.25);
+  --accent: #7c3aed;
+  --accent-strong: #6d28d9;
+  --accent-soft: rgba(124, 58, 237, 0.16);
+  --success: #14b8a6;
+  --border-color: rgba(148, 163, 184, 0.24);
+  --shadow-color: rgba(0, 0, 0, 0.28);
+  --hero-overlay: linear-gradient(90deg, rgba(8, 10, 18, 0.98), rgba(8, 10, 18, 0.86));
+  --hero-accent-panel: rgba(124, 58, 237, 0.14);
 }
 
 [data-theme="light"] {
-  --bg-primary: #f8fafc;
+  color-scheme: light;
+  --bg-primary: #f7f8fb;
   --surface-bg: #ffffff;
-  --card-bg: #eef2ff;
+  --surface-soft: #eef2f7;
+  --card-bg: #ffffff;
   --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --border-color: rgba(100, 116, 139, 0.25);
+  --text-secondary: #526071;
+  --accent: #6d28d9;
+  --accent-strong: #5b21b6;
+  --accent-soft: rgba(109, 40, 217, 0.1);
+  --success: #0f766e;
+  --border-color: rgba(100, 116, 139, 0.22);
+  --shadow-color: rgba(15, 23, 42, 0.12);
+  --hero-overlay: linear-gradient(90deg, rgba(247, 248, 251, 0.98), rgba(247, 248, 251, 0.9));
+  --hero-accent-panel: rgba(109, 40, 217, 0.09);
 }
 
 * {
@@ -28,6 +46,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   scroll-behavior: smooth;
+  letter-spacing: 0;
 }
 
 html,
@@ -38,8 +57,26 @@ body,
   color: var(--text-primary);
 }
 
+html {
+  scroll-padding-top: 88px;
+}
+
 body {
+  background:
+    linear-gradient(180deg, var(--bg-primary) 0%, color-mix(in srgb, var(--surface-bg) 28%, var(--bg-primary)) 100%);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
 }
 
 .hash-span {
@@ -49,13 +86,289 @@ body {
 }
 
 .section-surface {
-  background: color-mix(in srgb, var(--surface-bg) 92%, transparent);
+  background: var(--surface-bg);
   backdrop-filter: blur(8px);
 }
 
 .profile-image {
   border: 2px solid var(--border-color);
   background: var(--card-bg);
+  box-shadow: 0 24px 70px var(--shadow-color);
+}
+
+.profile-portrait {
+  object-position: center top;
+}
+
+.app-shell {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-bg) 34%, transparent) 0%, transparent 34%),
+    var(--bg-primary);
+  overflow: hidden;
+}
+
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1200px;
+}
+
+.app-shell > :not(.ambient-background) {
+  position: relative;
+  z-index: 1;
+}
+
+.ambient-grid {
+  position: absolute;
+  inset: -20% -10%;
+  opacity: 0.32;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  transform: rotateX(62deg) rotateZ(-8deg) translateY(10%);
+  animation: gridDrift 28s linear infinite;
+}
+
+.ambient-lines {
+  position: absolute;
+  width: 58vw;
+  height: 58vw;
+  min-width: 520px;
+  min-height: 520px;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background:
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 22px,
+      color-mix(in srgb, var(--accent) 12%, transparent) 23px 24px
+  );
+  mask-image: linear-gradient(90deg, transparent, #000 28%, #000 72%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 28%, #000 72%, transparent);
+  opacity: 0.34;
+  transform: rotateX(58deg) rotateZ(18deg);
+}
+
+.ambient-lines-one {
+  top: -12%;
+  right: -12%;
+  animation: lineFloat 22s ease-in-out infinite alternate;
+}
+
+.ambient-lines-two {
+  bottom: 6%;
+  left: -18%;
+  animation: lineFloat 28s ease-in-out infinite alternate-reverse;
+}
+
+.ambient-panel {
+  position: absolute;
+  width: 34vw;
+  height: 14vw;
+  min-width: 360px;
+  min-height: 150px;
+  border: 1px solid color-mix(in srgb, var(--success) 18%, transparent);
+  background:
+    linear-gradient(115deg, transparent, color-mix(in srgb, var(--success) 10%, transparent), transparent),
+    linear-gradient(90deg, color-mix(in srgb, var(--card-bg) 52%, transparent), transparent);
+  transform: rotateX(64deg) rotateZ(-18deg);
+  opacity: 0.28;
+  filter: blur(0.2px);
+}
+
+.ambient-panel-one {
+  top: 22%;
+  left: 5%;
+  animation: panelGlide 20s ease-in-out infinite;
+}
+
+.ambient-panel-two {
+  right: 4%;
+  bottom: 18%;
+  animation: panelGlide 24s ease-in-out infinite reverse;
+}
+
+.hero-bg {
+  position: relative;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42%;
+  background: linear-gradient(180deg, transparent, var(--bg-primary));
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+.surface-card {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--card-bg) 94%, transparent);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 18px 55px var(--shadow-color);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.surface-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 11%, transparent), transparent 38%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.25s ease;
+}
+
+.surface-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.surface-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 46%, var(--border-color));
+  box-shadow: 0 24px 70px var(--shadow-color);
+}
+
+.surface-card:hover::before {
+  opacity: 1;
+}
+
+.theme-focus:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 50%, transparent);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #ffffff !important;
+}
+
+.btn-primary:hover {
+  background: var(--accent-strong);
+}
+
+.skill-stage {
+  perspective: 1100px;
+}
+
+.skill-card-3d {
+  min-height: 132px;
+  transform-style: preserve-3d;
+  animation: skillFloat 5.6s ease-in-out var(--skill-delay) infinite;
+}
+
+.skill-card-inner {
+  position: relative;
+  display: flex;
+  min-height: 132px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 96%, transparent), color-mix(in srgb, var(--surface-soft) 96%, transparent)),
+    var(--card-bg);
+  box-shadow:
+    0 18px 45px var(--shadow-color),
+    inset 0 1px 0 color-mix(in srgb, #ffffff 16%, transparent);
+  transform: rotateX(0deg) rotateY(0deg) translateZ(0);
+  transform-style: preserve-3d;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.skill-card-inner img,
+.skill-card-inner span:not(.skill-card-shine) {
+  position: relative;
+  z-index: 1;
+  transform: translateZ(28px);
+}
+
+.skill-card-shine {
+  position: absolute;
+  inset: -35%;
+  background: linear-gradient(110deg, transparent 30%, color-mix(in srgb, #ffffff 18%, transparent) 48%, transparent 66%);
+  transform: translateX(-55%) rotate(8deg);
+  transition: transform 0.45s ease;
+}
+
+.skill-card-3d:hover {
+  animation-play-state: paused;
+}
+
+.skill-card-3d:hover .skill-card-inner {
+  border-color: color-mix(in srgb, var(--accent) 56%, var(--border-color));
+  box-shadow:
+    0 28px 70px var(--shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--accent) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #ffffff 22%, transparent);
+  transform: rotateX(10deg) rotateY(-12deg) translateY(-8px) translateZ(24px);
+}
+
+.skill-card-3d:hover .skill-card-shine {
+  transform: translateX(48%) rotate(8deg);
+}
+
+@keyframes gridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+    transform: rotateX(62deg) rotateZ(-8deg) translateY(10%);
+  }
+  100% {
+    background-position: 144px 216px, 144px 216px;
+    transform: rotateX(62deg) rotateZ(-8deg) translateY(4%);
+  }
+}
+
+@keyframes lineFloat {
+  0% {
+    transform: rotateX(58deg) rotateZ(18deg) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: rotateX(58deg) rotateZ(24deg) translate3d(34px, -28px, 70px);
+  }
+}
+
+@keyframes panelGlide {
+  0%,
+  100% {
+    transform: rotateX(64deg) rotateZ(-18deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotateX(64deg) rotateZ(-10deg) translate3d(42px, -22px, 90px);
+  }
+}
+
+@keyframes skillFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotateX(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(4deg);
+  }
 }
 
 .bg-primary {
@@ -68,7 +381,6 @@ body {
   background-color: var(--card-bg) !important;
 }
 
-.text-white,
 .text-white-100,
 h1,
 h2,
@@ -83,19 +395,63 @@ h6 {
   color: var(--text-secondary) !important;
 }
 
+.shadow-card {
+  box-shadow: 0 18px 55px var(--shadow-color);
+}
+
 .black-gradient {
   background: #000000;
   background: linear-gradient(to right, #434343, #000000);
 }
 
 .violet-gradient {
-  background: #804dee;
-  background: linear-gradient(-90deg, #804dee 0%, rgba(60, 51, 80, 0) 100%);
+  background: var(--accent);
+  background: linear-gradient(-90deg, var(--accent) 0%, rgba(60, 51, 80, 0) 100%);
 }
 
 .green-pink-gradient {
-  background: #00cea8;
-  background: linear-gradient(90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
+  background: var(--success);
+  background: linear-gradient(90.13deg, var(--success) 1.9%, var(--accent) 97.5%);
+}
+
+@media (max-width: 640px) {
+  .ambient-grid {
+    background-size: 54px 54px;
+    opacity: 0.22;
+  }
+
+  .ambient-lines {
+    min-width: 360px;
+    min-height: 360px;
+    opacity: 0.22;
+  }
+
+  .ambient-panel {
+    min-width: 260px;
+    min-height: 110px;
+    opacity: 0.18;
+  }
+
+  .skill-card-3d,
+  .skill-card-inner {
+    min-height: 118px;
+  }
+
+  .hash-span {
+    margin-top: -84px;
+    padding-bottom: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .orange-text-gradient {

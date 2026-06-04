@@ -31,18 +31,22 @@ const useGsap = (elementRef, animation, delay = 0) => {
 
 const ServiceCard = ({ index, title, icon }) => {
   const cardRef = useRef(null);
-  useGsap(cardRef, {
-    from: { opacity: 0, y: 100, scale: 0.8 },
-    to: { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" },
-  }, index * 0.2);
+  useGsap(
+    cardRef,
+    {
+      from: { opacity: 0, y: 60, scale: 0.94 },
+      to: { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" },
+    },
+    index * 0.12
+  );
 
   return (
-    <Tilt className="xs:w-[250px] w-full">
-      <div ref={cardRef} className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card">
-        <div className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col">
-          <img src={icon} alt="web-development" className="w-16 h-16 object-contain" />
-          <h3 className="text-white text-[20px] font-bold text-center">{title}</h3>
+    <Tilt className='w-full'>
+      <div ref={cardRef} className='surface-card flex min-h-[220px] w-full flex-col items-center justify-center rounded-lg p-6'>
+        <div className='mb-5 flex h-20 w-20 items-center justify-center rounded-lg bg-[var(--surface-soft)]'>
+          <img src={icon} alt={`${title} icon`} className='h-14 w-14 object-contain' />
         </div>
+        <h3 className='text-center text-[19px] font-bold text-[var(--text-primary)]'>{title}</h3>
       </div>
     </Tilt>
   );
@@ -71,11 +75,11 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>Overview.</h2>
       </div>
 
-      <p ref={paragraphRef} className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]">
+      <p ref={paragraphRef} className='mt-4 max-w-3xl text-[16px] leading-8 text-secondary sm:text-[17px]'>
         I'm a skilled software engineer with experience in Java, and expertise in frameworks like Flutter and React. I'm a quick learner and collaborate closely with clients to build efficient, scalable, and user-friendly applications that solve real-world problems. Let's work together to bring your ideas to life!
       </p>
 
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-10">
+      <div className='mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4'>
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}

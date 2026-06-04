@@ -1,4 +1,5 @@
 import logo from "./logo.png";
+import profile from "./profile.png";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -34,6 +35,7 @@ import CaseManagementSystem from './company/CaseManagementSystem.png';
 import ServiceEdge from './company/ServiceEdge.png';
 export {
   logo,
+  profile,
   backend,
   creator,
   mobile,

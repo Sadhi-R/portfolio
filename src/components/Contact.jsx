@@ -82,12 +82,10 @@ const Contact = () => {
   };
 
   return (
-    <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
-    >
+    <div className='flex flex-col-reverse gap-10 overflow-hidden xl:mt-8 xl:flex-row'>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
+        className='surface-card flex-[0.75] rounded-lg p-5 sm:p-8'
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
@@ -95,10 +93,10 @@ const Contact = () => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className='mt-12 flex flex-col gap-8'
+          className='mt-10 flex flex-col gap-6'
         >
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Name</span>
+            <span className='mb-3 font-medium text-[var(--text-primary)]'>Your Name</span>
             <input
               type='text'
               name='name'
@@ -109,11 +107,11 @@ const Contact = () => {
               minLength={2}
               maxLength={120}
               autoComplete='name'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='theme-focus rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-4 font-medium text-[var(--text-primary)] outline-none placeholder:text-secondary'
             />
           </label>
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your email</span>
+            <span className='mb-3 font-medium text-[var(--text-primary)]'>Your email</span>
             <input
               type='email'
               name='email'
@@ -123,11 +121,11 @@ const Contact = () => {
               required
               inputMode='email'
               autoComplete='email'
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='theme-focus rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-4 font-medium text-[var(--text-primary)] outline-none placeholder:text-secondary'
             />
           </label>
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your Message</span>
+            <span className='mb-3 font-medium text-[var(--text-primary)]'>Your Message</span>
             <textarea
               rows={7}
               name='message'
@@ -137,13 +135,13 @@ const Contact = () => {
               required
               minLength={5}
               maxLength={5000}
-              className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
+              className='theme-focus rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)] px-5 py-4 font-medium text-[var(--text-primary)] outline-none placeholder:text-secondary'
             />
           </label>
 
           <button
             type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+            className='theme-focus btn-primary w-full rounded-lg px-8 py-3 font-bold outline-none transition xs:w-fit'
           >
             {loading ? "Sending..." : "Send"}
           </button>

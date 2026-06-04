@@ -12,13 +12,11 @@ import { projects } from "../constants";
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectCard = ({
-  index,
   name,
   description,
   tags,
   image,
   source_code_link,
-  height
 }) => {
   const cardRef = useRef(null);
 
@@ -47,43 +45,42 @@ const ProjectCard = ({
   }, []);
 
   return (
-    <div ref={cardRef}>
+    <div ref={cardRef} className='h-full'>
       <Tilt
         options={{
-          max: 45,
+          max: 18,
           scale: 1,
           speed: 450,
         }}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
-        style={{ height }}
+        className='surface-card flex h-full w-full flex-col rounded-lg p-4'
       >
-        <div className="relative w-full h-[230px]">
+        <div className='relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-[var(--surface-soft)]'>
           <img
             src={image}
-            alt="project_image"
-            className="w-full h-full object-cover object-left rounded-2xl"
+            alt={`${name} project preview`}
+            className='h-full w-full object-cover object-left'
           />
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
+          <div className='card-img_hover absolute inset-0 m-3 flex justify-end'>
             <div
               onClick={() => window.open(source_code_link, "_blank")}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+              className='black-gradient flex h-10 w-10 cursor-pointer items-center justify-center rounded-full'
             >
               <img
                 src={github}
-                alt="source code"
-                className="w-1/2 h-1/2 object-contain"
+                alt='source code'
+                className='h-1/2 w-1/2 object-contain'
               />
             </div>
           </div>
         </div>
 
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
+        <div className='mt-5 flex flex-1 flex-col'>
+          <h3 className='text-[20px] font-bold leading-7 text-[var(--text-primary)]'>{name}</h3>
+          <p className='mt-3 text-[14px] leading-6 text-secondary'>{description}</p>
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className='mt-4 flex flex-wrap gap-2'>
           {tags.map((tag) => (
             <p
               key={`${name}-${tag.name}`}
@@ -129,15 +126,16 @@ const Works = () => {
         <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
       </div>
 
-      <div className="w-full flex">
-        <p className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]">
-          The following projects demonstrate my skills and experience through real-world applications I've contributed to. Each project includes a brief description, highlighting my ability to solve complex problems, work across different technologies, and manage end-to-end development effectively..
+      <div className='flex w-full'>
+        <p className='mt-3 max-w-3xl text-[16px] leading-8 text-secondary sm:text-[17px]'>
+          The following projects demonstrate my skills and experience through real-world applications I&apos;ve contributed to.
+          Each project highlights my ability to solve complex problems, work across technologies, and manage end-to-end development effectively.
         </p>
       </div>
 
-      <div className="works-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
+      <div className='works-container mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3'>
         {projects.map((project, index) => (
-          <div key={`project-${index}`} className="project-card">
+          <div key={`project-${index}`} className='project-card h-full'>
             <ProjectCard index={index} {...project} />
           </div>
         ))}

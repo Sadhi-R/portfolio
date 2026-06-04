@@ -184,7 +184,7 @@ const experiences = [
 
 const projects = [
   {
-    name: "D3E Studio – Low-Code Development Platform",
+    name: "D3E Studio - Low-Code Development Platform",
     description:
       "A low-code platform designed to build and deploy cross-platform applications with minimal coding. It supports end-to-end workflows from UI design to backend integrations.",
     tags: [],
@@ -193,7 +193,7 @@ const projects = [
     height: "500px",
   },
   {
-    name: "RewaHR – HR Management Portal",
+    name: "RewaHR - HR Management Portal",
     description:
       "A full-featured portal designed to streamline HR operations such as attendance, payroll, leave management, and employee tracking. It provides secure, role-based access and real-time reporting dashboards for HR teams.",
     tags: [],
@@ -211,7 +211,7 @@ const projects = [
     height: "500px",
   },
   {
-    name: "FindNok – Next of Kin Web App",
+    name: "FindNok - Next of Kin Web App",
     description:
       "A secure web app that helps users store and manage next of kin information. Users can update, view, and map family relationships easily within the platform. Designed for simplicity, security, and accessibility.",
     tags: [],
@@ -247,7 +247,7 @@ const projects = [
     height: "500px",
   },
   {
-    name: "ServiceEdge – Home Service Booking App",
+    name: "ServiceEdge - Home Service Booking App",
     description:
       "An app for booking home services like electrical repairs, plumbing, and appliance maintenance. Customers can schedule appointments, and vendors manage bookings through a dashboard.",
     tags: [],
@@ -265,7 +265,7 @@ const projects = [
     height: "500px",
   },
   {
-    name: "DWS Event Sphere – Event Calendar App",
+    name: "DWS Event Sphere - Event Calendar App",
     description:
       "A calendar-based app for scheduling and discovering events with RSVP functionality. Users can explore upcoming events, set reminders, and filter by category.",
     tags: [],

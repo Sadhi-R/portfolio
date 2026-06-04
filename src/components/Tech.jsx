@@ -31,14 +31,31 @@ const Tech = () => {
 
   return (
     <section>
-      <div className="tech-icons-wrapper flex flex-row flex-wrap justify-center gap-10">
-        {technologies.map((technology) => (
-          <div className="w-28 h-28" key={technology.name}>
-            <img
-              src={technology.icon}
-              alt={technology.name}
-              className="tech-icon w-full h-full object-contain"
-            />
+      <div className='mb-10 text-center'>
+        <p className='text-sm font-semibold uppercase text-secondary sm:text-[15px]'>Tools I work with</p>
+        <h2 className='mt-2 text-[30px] font-black leading-tight text-[var(--text-primary)] sm:text-[42px] lg:text-[52px]'>
+          Technologies.
+        </h2>
+      </div>
+      <div className='tech-icons-wrapper skill-stage grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8'>
+        {technologies.map((technology, index) => (
+          <div
+            className='skill-card-3d tech-icon'
+            key={technology.name}
+            title={technology.name}
+            style={{ "--skill-delay": `${index * 70}ms` }}
+          >
+            <div className='skill-card-inner'>
+              <span className='skill-card-shine' aria-hidden='true' />
+              <img
+                src={technology.icon}
+                alt={technology.name}
+                className='h-14 w-14 object-contain sm:h-16 sm:w-16'
+              />
+              <span className='mt-3 text-center text-xs font-semibold text-[var(--text-primary)] sm:text-sm'>
+                {technology.name}
+              </span>
+            </div>
           </div>
         ))}
       </div>

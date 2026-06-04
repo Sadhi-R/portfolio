@@ -1,39 +1,72 @@
-import { creator } from "../assets";
+import { FiDownload, FiMail, FiMapPin } from "react-icons/fi";
+
+import { profile } from "../assets";
 import resumeFile from "../assets/Resume.pdf";
 import { SectionWrapper } from "../hoc";
 
+const highlights = [
+  "React, Java, Flutter, and database-driven product development",
+  "End-to-end ownership across UI, backend integration, and deployment",
+  "Clear communication with product, design, and cross-functional teams",
+];
+
 const HireMe = () => {
   return (
-    <section className='grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_1.2fr]'>
-      <div className='mx-auto w-full max-w-[280px] lg:mx-0'>
-        <img
-          src={creator}
-          alt='Sadhi Ramtenki profile portrait'
-          className='profile-image w-full rounded-2xl object-cover shadow-lg'
-        />
+    <section className='grid grid-cols-1 items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]'>
+      <div className='mx-auto w-full max-w-[340px] lg:mx-0'>
+        <div className='overflow-hidden rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)]'>
+          <img
+            src={profile}
+            alt='Sadhi Ramtenki profile portrait'
+            className='profile-portrait aspect-[4/5] w-full object-cover'
+          />
+        </div>
+        <div className='mt-4 rounded-lg border border-[var(--border-color)] bg-[var(--card-bg)] p-4'>
+          <div className='flex items-center gap-2 text-sm font-medium text-secondary'>
+            <FiMapPin className='text-[var(--accent)]' aria-hidden='true' />
+            Open to remote and on-site opportunities
+          </div>
+        </div>
       </div>
 
       <div>
-        <p className='text-sm uppercase tracking-wider text-secondary sm:text-[16px]'>Let&apos;s Collaborate</p>
-        <h2 className='mt-2 text-3xl font-black text-[var(--text-primary)] sm:text-4xl'>Hire Me</h2>
+        <p className='text-sm font-semibold uppercase text-secondary sm:text-[15px]'>Let&apos;s collaborate</p>
+        <h2 className='mt-2 text-3xl font-black leading-tight text-[var(--text-primary)] sm:text-4xl lg:text-5xl'>
+          Hire Me
+        </h2>
         <p className='mt-4 max-w-2xl text-base leading-7 text-secondary sm:text-[17px]'>
-          I help teams deliver performant products with thoughtful UX, scalable architecture, and clean code.
-          If you&apos;re looking for a software engineer who can own features end-to-end, I&apos;d love to contribute.
+          I help teams ship performant, maintainable products with thoughtful UX and dependable engineering.
+          If you need a software engineer who can understand requirements, own features, and deliver polished work,
+          I&apos;d be glad to talk.
         </p>
 
-        <div className='mt-6 flex flex-wrap gap-3'>
-          <a
-            href='#contact'
-            className='rounded-lg bg-[#915EFF] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90'
-          >
-            Start a Conversation
-          </a>
+        <div className='mt-6 grid gap-3'>
+          {highlights.map((item) => (
+            <div
+              key={item}
+              className='flex items-start gap-3 rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)] p-4 text-sm text-secondary'
+            >
+              <span className='mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--success)]' />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className='mt-7 flex flex-col gap-3 xs:flex-row'>
           <a
             href={resumeFile}
             download='Sadhi-Ramtenki-Resume.pdf'
-            className='rounded-lg border border-[var(--border-color)] bg-[var(--card-bg)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:opacity-90'
+            className='theme-focus btn-primary inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition'
           >
+            <FiDownload aria-hidden='true' />
             Download Resume / CV
+          </a>
+          <a
+            href='#contact'
+            className='theme-focus inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border-color)] bg-[var(--card-bg)] px-5 py-3 text-sm font-semibold text-[var(--text-primary)] transition hover:border-[var(--accent)]'
+          >
+            <FiMail aria-hidden='true' />
+            Start a Conversation
           </a>
         </div>
       </div>
