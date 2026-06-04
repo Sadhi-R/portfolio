@@ -12,11 +12,7 @@ import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
-const ExperienceCard = ({ experience }) => {
-  const rootStyles = getComputedStyle(document.documentElement);
-  const cardBg = rootStyles.getPropertyValue("--card-bg").trim() || "#1d1836";
-  const textColor = rootStyles.getPropertyValue("--text-primary").trim() || "#fff";
-
+const ExperienceCard = ({ experience, cardBg, textColor }) => {
   return (
     <VerticalTimelineElement
       contentStyle={{
@@ -61,6 +57,12 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
+  const rootStyles = getComputedStyle(document.documentElement);
+  const timelineTheme = {
+    cardBg: rootStyles.getPropertyValue("--card-bg").trim() || "#1d1836",
+    textColor: rootStyles.getPropertyValue("--text-primary").trim() || "#fff",
+  };
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -78,6 +80,8 @@ const Experience = () => {
             <ExperienceCard
               key={`experience-${index}`}
               experience={experience}
+              cardBg={timelineTheme.cardBg}
+              textColor={timelineTheme.textColor}
             />
           ))}
         </VerticalTimeline>
