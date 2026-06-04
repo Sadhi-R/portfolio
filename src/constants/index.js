@@ -143,16 +143,26 @@ const technologies = [
 const experiences = [
   {
     title: "Software Engineer",
+    company_name: "D3E Studio",
+    icon: d3eproject,
+    iconBg: "#383E56",
+    date: "Sep 2025 - Present",
+    points: [
+      "Building, developing, and maintaining cutting-edge software applications.",
+      "Currently working on D3E (Design Develop Deploy), a fully AI-driven product that can generate entire applications from a single prompt.",
+      "Focused on automating complex workflows, scaling products efficiently, and turning innovative ideas into functional software solutions.",
+    ],
+  },
+  {
+    title: "Software Engineer",
     company_name: "NITYA Software Solutions Inc",
     icon: tekisky,
     iconBg: "#383E56",
-    date: "Aug 2022 - Present",
+    date: "Aug 2022 - Sep 2025",
     points: [
-      "Designing, developing, and maintaining scalable software applications using Java, Flutter, and React.",
-      "Collaborating with cross-functional teams to deliver robust, user-focused solutions tailored to business needs.",
-      "Built and contributed to 10+ applications including Syllabus Management, Restaurant Management, Rewa HR, Hostel Pro, Event Sphere, Case Management, and Lead Management systems.",
-      "Ensured timely delivery of high-quality code, following industry standards and agile practices.",
-      "Actively participated in code reviews, performance optimization, and client interactions.",
+      "Designed, developed, and maintained software applications aligned with client requirements and industry standards.",
+      "Solved complex engineering problems through coding and technical analysis.",
+      "Collaborated with cross-functional teams to deliver high-quality software solutions.",
     ],
   },
   {
@@ -162,9 +172,9 @@ const experiences = [
     iconBg: "#383E56",
     date: "Jan 2022 - Jul 2022",
     points: [
-      "Completed industrial training in Optical Fiber networks.",
-      "Gained hands-on experience in installation, configuration, and troubleshooting.",
-      "Developed foundational technical skills and teamwork abilities in a practical environment.",
+      "Completed industrial training in Optical Fiber at SunGlare Technologies Pvt. Ltd.",
+      "Gained hands-on field experience in optical fiber operations.",
+      "Strengthened technical fundamentals and practical problem-solving skills for future industry challenges.",
     ],
   },
 ];
