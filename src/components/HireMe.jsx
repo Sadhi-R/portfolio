@@ -1,13 +1,14 @@
 import { FiDownload, FiMail, FiMapPin } from "react-icons/fi";
 
 import { profile } from "../assets";
-import resumeFile from "../assets/Resume.pdf";
+import resumeFile from "../assets/Updated-Resume.pdf";
 import { SectionWrapper } from "../hoc";
 
 const highlights = [
-  "React, Java, Flutter, and database-driven product development",
-  "End-to-end ownership across UI, backend integration, and deployment",
-  "Clear communication with product, design, and cross-functional teams",
+  "Full-stack development with Flutter, React.js, Java, and Node.js",
+  "AI-driven development and workflow automation (D3E platform)",
+  "RESTful APIs, microservices, and database optimization (PostgreSQL, MongoDB)",
+  "End-to-end ownership from requirements to deployment with CI/CD",
 ];
 
 const HireMe = () => {
@@ -18,6 +19,8 @@ const HireMe = () => {
           <img
             src={profile}
             alt='Sadhi Ramtenki profile portrait'
+            loading='lazy'
+            decoding='async'
             className='profile-portrait aspect-[4/5] w-full object-cover'
           />
         </div>

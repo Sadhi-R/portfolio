@@ -50,6 +50,8 @@ const Tech = () => {
               <img
                 src={technology.icon}
                 alt={technology.name}
+                loading='lazy'
+                decoding='async'
                 className='h-14 w-14 object-contain sm:h-16 sm:w-16'
               />
               <span className='mt-3 text-center text-xs font-semibold text-[var(--text-primary)] sm:text-sm'>

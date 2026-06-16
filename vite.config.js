@@ -12,4 +12,20 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    target: 'es2019',
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        // Split heavy dependencies into separate cacheable chunks so the
+        // initial page render does not have to download all of them up front.
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei', 'maath'],
+          motion: ['framer-motion', 'gsap', '@gsap/react'],
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
+  },
 })

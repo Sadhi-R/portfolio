@@ -5,8 +5,6 @@ import {
   mobile,
   web,
   github,
-  menu,
-  close,
   css,
   mysql,
   figma,
@@ -14,7 +12,6 @@ import {
   html,
   javascript,
   reactjs,
-  sunglare,
   java,
   gitbash,
   eclipse,
@@ -35,7 +32,9 @@ import {
   ServiceEdge,
 } from "../assets";
 
-import tekisky from "../assets/company/tekisky.png";
+import d3eLogo from "../assets/company/d3e-logo.jpeg";
+import nityaLogo from "../assets/company/nitya-software-logo.png";
+import sunglareLogo from "../assets/company/sunglare-logo.jpeg";
 
 export const navLinks = [
   {
@@ -49,6 +48,10 @@ export const navLinks = [
   {
     id: "work",
     title: "Work",
+  },
+  {
+    id: "education",
+    title: "Education",
   },
   {
     id: "contact",
@@ -147,39 +150,67 @@ const experiences = [
   {
     title: "Software Engineer",
     company_name: "D3E Studio",
-    icon: d3eproject,
-    iconBg: "#383E56",
+    icon: d3eLogo,
+    iconBg: "#ffffff",
     date: "Sep 2025 - Present",
     points: [
-      "Building, developing, and maintaining cutting-edge software applications.",
-      "Currently working on D3E (Design Develop Deploy), a fully AI-driven product that can generate entire applications from a single prompt.",
-      "Focused on automating complex workflows, scaling products efficiently, and turning innovative ideas into functional software solutions.",
+      "Architecting and developing D3E (Design Develop Deploy), a revolutionary AI-powered platform that generates complete software applications from a single natural-language prompt.",
+      "Implementing advanced AI models and prompt-engineering techniques to automate code generation, reducing development time by up to 80%.",
+      "Building scalable microservices architecture to support multi-tenant application deployment and management.",
+      "Collaborating with cross-functional teams to integrate AI capabilities into production-grade software systems.",
+      "Establishing best practices for AI-driven development workflows and automated testing pipelines.",
     ],
   },
   {
     title: "Software Engineer",
     company_name: "NITYA Software Solutions Inc",
-    icon: tekisky,
-    iconBg: "#383E56",
+    icon: nityaLogo,
+    iconBg: "#ffffff",
     date: "Aug 2022 - Sep 2025",
     points: [
-      "Designed, developed, and maintained software applications aligned with client requirements and industry standards.",
-      "Solved complex engineering problems through coding and technical analysis.",
-      "Collaborated with cross-functional teams to deliver high-quality software solutions.",
+      "Developed and maintained 5+ client-facing applications using Flutter and React.js, ensuring adherence to industry standards and client specifications.",
+      "Led the full software development lifecycle from requirements gathering to deployment, improving delivery efficiency by 40%.",
+      "Designed and implemented RESTful APIs and integrated third-party services to enhance application functionality.",
+      "Collaborated with cross-functional teams of 5–10 members to deliver high-quality software solutions on schedule.",
+      "Optimized application performance through code refactoring and database query optimization, reducing load times by 35%.",
+      "Mentored junior developers on best coding practices, code reviews, and modern frameworks.",
     ],
   },
   {
-    title: "Fiber Technician (Internship)",
+    title: "Fiber Technician (Industrial Training)",
     company_name: "SUNGLARE TECHNOLOGIES PVT LTD",
-    icon: sunglare,
-    iconBg: "#383E56",
+    icon: sunglareLogo,
+    iconBg: "#ffffff",
     date: "Jan 2022 - Jul 2022",
     points: [
-      "Completed industrial training in Optical Fiber at SunGlare Technologies Pvt. Ltd.",
-      "Gained hands-on field experience in optical fiber operations.",
-      "Strengthened technical fundamentals and practical problem-solving skills for future industry challenges.",
+      "Completed comprehensive industrial training in Optical Fiber technology, gaining practical technical expertise.",
+      "Developed strong problem-solving skills and attention to detail through hands-on infrastructure work.",
     ],
   },
+];
+
+const educations = [
+  {
+    degree: "Bachelor of Technology — Computer Science",
+    school: "Sri Chaitanya Technical Campus (AICTE Approved), Hyderabad",
+    date: "Oct 2022 - Jul 2025",
+    description:
+      "Pursued B.Tech via Lateral Entry (TS ECET) while working full-time as a Software Engineer — an AICTE-approved pathway for Diploma holders entering directly into the second year.",
+  },
+  {
+    degree: "Diploma — Electronics & Communications Engineering",
+    school: "Government Model Residential Polytechnic, Gajwel",
+    date: "Jun 2019 - May 2022",
+    description:
+      "Built a strong foundation in core electronics, communication systems, and practical, hands-on engineering skills.",
+  },
+];
+
+const achievements = [
+  "Received a Certificate of Appreciation from the President & CEO of D3E Studio for exceptional contributions and technical excellence.",
+  "Pioneered an AI-driven application-generation platform that enables non-technical users to create functional software.",
+  "Delivered 15+ production applications serving 1,000+ users with 99.5% uptime.",
+  "Reduced development cycle time by 40% through automated workflows and CI/CD pipelines.",
 ];
 
 const projects = [
@@ -284,4 +315,4 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, projects };
+export { services, technologies, experiences, educations, achievements, projects };

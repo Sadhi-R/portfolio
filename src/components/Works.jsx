@@ -58,6 +58,8 @@ const ProjectCard = ({
           <img
             src={image}
             alt={`${name} project preview`}
+            loading='lazy'
+            decoding='async'
             className='h-full w-full object-cover object-left'
           />
 

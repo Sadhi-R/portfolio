@@ -5,15 +5,79 @@
     <link rel="icon" type="image/svg+xml" href="/src/assets/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-adsense-account" content="ca-pub-9034473393085238">
+    <meta name="description" content="Sadhi Ramtenki - Software Engineer specializing in React, Java, and Flutter. Building clean, scalable, and reliable applications." />
     <title>Sadhi Ramtenki's Portfolio</title>
     <script>
       const savedTheme = localStorage.getItem("theme");
       const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", savedTheme || preferredTheme);
     </script>
+    <style>
+      :root {
+        --boot-bg: #080a12;
+        --boot-fg: #f8fafc;
+        --boot-accent: #7c3aed;
+        --boot-border: rgba(148, 163, 184, 0.24);
+      }
+      [data-theme="light"] {
+        --boot-bg: #f7f8fb;
+        --boot-fg: #0f172a;
+        --boot-accent: #6d28d9;
+        --boot-border: rgba(100, 116, 139, 0.22);
+      }
+      html,
+      body {
+        margin: 0;
+        background: var(--boot-bg);
+      }
+      #app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: var(--boot-bg);
+        color: var(--boot-fg);
+        font-family: "Poppins", system-ui, sans-serif;
+      }
+      #app-splash .splash-ring {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: 3px solid var(--boot-border);
+        border-top-color: var(--boot-accent);
+        animation: splash-spin 0.8s linear infinite;
+      }
+      #app-splash .splash-name {
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+      #app-splash .splash-name span {
+        color: var(--boot-accent);
+      }
+      @keyframes splash-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #app-splash .splash-ring {
+          animation-duration: 1.6s;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="app-splash" aria-hidden="true">
+        <div class="splash-ring"></div>
+        <div class="splash-name">Sadhi <span>Ramtenki</span></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

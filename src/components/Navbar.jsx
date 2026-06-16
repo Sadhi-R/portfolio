@@ -6,17 +6,52 @@ import { styles } from "../styles";
 import { navLinks } from "../constants";
 import { logo } from "../assets";
 
+const NAV_OFFSET = 80;
+
 const Navbar = ({ theme, onToggleTheme }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+  const getSection = (id) => {
+    const anchor = document.getElementById(id);
+    return anchor ? anchor.closest("section") || anchor : null;
+  };
 
-    window.addEventListener("scroll", handleScroll);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 80);
+
+      // Scroll-spy: highlight the section currently in view.
+      const current = navLinks
+        .map((nav) => {
+          const section = getSection(nav.id);
+          if (!section) return null;
+          return { title: nav.title, top: section.getBoundingClientRect().top };
+        })
+        .filter(Boolean)
+        .filter((item) => item.top - NAV_OFFSET - 8 <= 0)
+        .pop();
+
+      if (current) setActive(current.title);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (event, nav) => {
+    event.preventDefault();
+    setActive(nav.title);
+    setToggle(false);
+
+    const section = getSection(nav.id);
+    if (!section) return;
+
+    const y = section.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  };
 
   const themeButton = (
     <button
@@ -69,9 +104,10 @@ const Navbar = ({ theme, onToggleTheme }) => {
                 className={`cursor-pointer text-[15px] font-medium transition ${
                   active === nav.title ? "text-[var(--text-primary)]" : "text-secondary"
                 } hover:text-[var(--text-primary)]`}
-                onClick={() => setActive(nav.title)}
               >
-                <a href={`#${nav.id}`}>{nav.title}</a>
+                <a href={`#${nav.id}`} onClick={(event) => handleNavClick(event, nav)}>
+                  {nav.title}
+                </a>
               </li>
             ))}
           </ul>
@@ -101,12 +137,10 @@ const Navbar = ({ theme, onToggleTheme }) => {
                   className={`cursor-pointer text-[16px] font-medium ${
                     active === nav.title ? "text-[var(--text-primary)]" : "text-secondary"
                   }`}
-                  onClick={() => {
-                    setToggle(false);
-                    setActive(nav.title);
-                  }}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  <a href={`#${nav.id}`} onClick={(event) => handleNavClick(event, nav)}>
+                    {nav.title}
+                  </a>
                 </li>
               ))}
             </ul>

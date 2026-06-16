@@ -76,7 +76,11 @@ const About = () => {
       </div>
 
       <p ref={paragraphRef} className='mt-4 max-w-3xl text-[16px] leading-8 text-secondary sm:text-[17px]'>
-        I'm a skilled software engineer with experience in Java, and expertise in frameworks like Flutter and React. I'm a quick learner and collaborate closely with clients to build efficient, scalable, and user-friendly applications that solve real-world problems. Let's work together to bring your ideas to life!
+        I&apos;m a results-driven software engineer with 3+ years of experience building scalable,
+        full-stack applications. I work across Flutter, React.js, Java, and modern AI technologies, and
+        I&apos;m currently developing D3E &mdash; an AI-powered platform that turns natural-language prompts
+        into complete applications. I love automating complex workflows, optimizing performance, and turning
+        ideas into reliable, user-friendly software. Let&apos;s work together to bring your ideas to life!
       </p>
 
       <div className='mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4'>

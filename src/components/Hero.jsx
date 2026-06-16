@@ -6,8 +6,8 @@ import { profile } from "../assets";
 
 const heroStats = [
   { value: "3+", label: "Years Experience" },
-  { value: "10+", label: "Projects Built" },
-  { value: "3", label: "Core Stacks" },
+  { value: "15+", label: "Projects Delivered" },
+  { value: "1,000+", label: "Users Served" },
 ];
 
 const Hero = () => {
