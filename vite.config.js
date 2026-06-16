@@ -21,7 +21,7 @@ export default defineConfig({
         // Split heavy dependencies into separate cacheable chunks so the
         // initial page render does not have to download all of them up front.
         manualChunks: {
-          three: ['three', '@react-three/fiber', '@react-three/drei', 'maath'],
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
           motion: ['framer-motion', 'gsap', '@gsap/react'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
         },

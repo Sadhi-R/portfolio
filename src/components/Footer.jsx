@@ -42,7 +42,7 @@ const Footer = () => {
         ))}
       </div>
       <p className='text-xs text-secondary'>
-        &copy; {new Date().getFullYear()} Sadhi Ramtenki. All rights reserved.
+        &copy; {new Date().getFullYear()} Sadaiah Ramtenki. All rights reserved.
       </p>
     </footer>
   );

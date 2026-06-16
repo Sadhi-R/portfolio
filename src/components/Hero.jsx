@@ -14,7 +14,7 @@ const Hero = () => {
   return (
     <section className='relative mx-auto flex min-h-screen w-full items-center pt-28 sm:pt-32'>
       <div
-        className={`mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 ${styles.paddingX} pb-20 lg:grid-cols-[1fr_440px] xl:grid-cols-[1fr_500px]`}
+        className={`mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 ${styles.paddingX} pb-20 lg:grid-cols-[1fr_360px] xl:grid-cols-[1fr_400px]`}
       >
         <div className='max-w-3xl'>
           <div className='mb-5 inline-flex items-center gap-2 rounded-lg border border-[var(--border-color)] bg-[var(--card-bg)] px-4 py-2 text-xs font-semibold uppercase text-secondary'>
@@ -23,7 +23,7 @@ const Hero = () => {
           </div>
 
           <h1 className={styles.heroHeadText}>
-            Hi, I&apos;m <span className='text-[var(--accent)]'>Sadhi Ramtenki</span>
+            Hi, I&apos;m <span className='text-[var(--accent)]'>Sadaiah Ramtenki</span>
           </h1>
           <p className={`${styles.heroSubText} mt-5 max-w-2xl text-secondary`}>
             Software engineer focused on React, Java, Flutter, and practical product delivery. I build clean,
@@ -57,17 +57,17 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className='relative mx-auto w-full max-w-[420px] lg:mr-0 xl:max-w-[470px]'>
+        <div className='relative mx-auto w-full max-w-[320px] lg:mr-0 xl:max-w-[360px]'>
           <div className='absolute -right-3 -top-3 hidden h-full w-full rounded-lg border border-[var(--border-color)] bg-[var(--hero-accent-panel)] sm:block' />
           <div className='surface-card relative overflow-hidden rounded-lg p-3'>
             <div className='relative overflow-hidden rounded-lg bg-[var(--surface-soft)]'>
               <img
                 src={profile}
-                alt='Sadhi Ramtenki profile'
-                className='profile-portrait h-[410px] w-full object-cover sm:h-[500px] lg:h-[540px]'
+                alt='Sadaiah Ramtenki profile'
+                className='profile-portrait h-[320px] w-full object-cover sm:h-[380px] lg:h-[420px]'
               />
               <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-5 text-white'>
-                <p className='text-lg font-bold text-white'>Sadhi Ramtenki</p>
+                <p className='text-lg font-bold text-white'>Sadaiah Ramtenki</p>
                 <p className='mt-1 text-sm text-white/85'>Software Engineer</p>
               </div>
             </div>

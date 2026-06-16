@@ -15,6 +15,7 @@ import {
   Works,
 } from "./components";
 import Footer from "./components/Footer";
+import FloatingContact from "./components/FloatingContact";
 
 // Three.js is heavy, so the starfield is split into its own async chunk and
 // only mounted once the browser is idle. This keeps the initial load fast.
@@ -60,12 +61,14 @@ const App = () => {
   const toggleTheme = () => setTheme((current) => (current === "dark" ? "light" : "dark"));
 
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <motion.div
         className='fixed left-0 top-0 z-[60] h-1 w-full origin-left bg-[var(--accent)]'
         style={{ scaleX: progressScale }}
         aria-hidden='true'
       />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <FloatingContact />
       <div className='app-shell relative z-0 min-h-screen bg-primary text-[var(--text-primary)] transition-colors duration-300'>
         <div className='ambient-background' aria-hidden='true'>
           <div className='ambient-grid' />
@@ -75,7 +78,6 @@ const App = () => {
           <div className='ambient-panel ambient-panel-two' />
         </div>
         <div className='hero-bg bg-hero-pattern bg-cover bg-no-repeat bg-center'>
-          <Navbar theme={theme} onToggleTheme={toggleTheme} />
           <Hero />
         </div>
         <About />

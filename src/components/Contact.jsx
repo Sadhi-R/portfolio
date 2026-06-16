@@ -1,42 +1,13 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { FaWhatsapp } from "react-icons/fa6";
-import { FiMail, FiPhone } from "react-icons/fi";
 // emailjs removed; using local API via Nodemailer/Gmail SMTP
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
 
-const contactChannels = [
-  {
-    label: "WhatsApp",
-    value: "+91 72868 21058",
-    href: "https://wa.me/917286821058",
-    Icon: FaWhatsapp,
-  },
-  {
-    label: "Call",
-    value: "+91 72868 21058",
-    href: "tel:+917286821058",
-    Icon: FiPhone,
-  },
-  {
-    label: "Email",
-    value: "ramtenkisadhi@gmail.com",
-    href: "mailto:ramtenkisadhi@gmail.com",
-    Icon: FiMail,
-  },
-];
-
-// The 3D Earth (Three.js + a multi-MB GLTF model) is loaded lazily and only
-// when the contact section is actually scrolled into view.
-const EarthCanvas = lazy(() => import("./canvas/Earth"));
-
 const Contact = () => {
   const formRef = useRef();
-  const earthRef = useRef(null);
-  const [showEarth, setShowEarth] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -44,24 +15,7 @@ const Contact = () => {
   });
 
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const node = earthRef.current;
-    if (!node || showEarth) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setShowEarth(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [showEarth]);
+  const [status, setStatus] = useState({ type: "", message: "" });
 
   // Resolve API base from env (VITE_API_URL) or default to "/api" for Nginx/proxy setups
   const apiBase = (import.meta.env.VITE_API_URL || "/api").replace(/\/+$/, "");
@@ -74,11 +28,13 @@ const Contact = () => {
       ...form,
       [name]: value,
     });
+    if (status.message) setStatus({ type: "", message: "" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatus({ type: "", message: "" });
 
     // HTML5 constraint validation first
     if (formRef.current && !formRef.current.checkValidity()) {
@@ -109,29 +65,36 @@ const Contact = () => {
       });
 
       if (!res.ok) {
-        let msg = "Request failed";
+        let msg = "Unable to send your message right now. Please try WhatsApp or call me directly.";
         try {
-          const data = await res.json();
+          const raw = await res.text();
+          const data = raw ? JSON.parse(raw) : null;
           if (data?.error) msg = data.error;
         } catch {}
         throw new Error(msg);
       }
 
-      setLoading(false);
-      alert("Thank you. I will get back to you as soon as possible.");
+      setStatus({
+        type: "success",
+        message: "Thank you. I will get back to you as soon as possible.",
+      });
       setForm({ name: "", email: "", message: "" });
     } catch (error) {
-      setLoading(false);
       console.error(error);
-      alert(error?.message || "Ahh, something went wrong. Please try again.");
+      setStatus({
+        type: "error",
+        message: error?.message || "Ahh, something went wrong. Please try again.",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className='flex flex-col-reverse gap-10 overflow-hidden xl:mt-8 xl:flex-row'>
+    <div className='mx-auto w-full max-w-2xl'>
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
-        className='surface-card flex-[0.75] rounded-lg p-5 sm:p-8'
+        className='surface-card rounded-lg p-5 sm:p-8'
       >
         <p className={styles.sectionSubText}>Get in touch</p>
         <h3 className={styles.sectionHeadText}>Contact.</h3>
@@ -187,48 +150,25 @@ const Contact = () => {
 
           <button
             type='submit'
+            disabled={loading}
             className='theme-focus btn-primary w-full rounded-lg px-8 py-3 font-bold outline-none transition xs:w-fit'
           >
             {loading ? "Sending..." : "Send"}
           </button>
+
+          {status.message && (
+            <p
+              role={status.type === "error" ? "alert" : "status"}
+              className={`rounded-lg border px-4 py-3 text-sm font-medium ${
+                status.type === "success"
+                  ? "border-[var(--success)] bg-[var(--accent-soft)] text-[var(--text-primary)]"
+                  : "border-red-500/40 bg-red-500/10 text-red-200"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
         </form>
-
-        <div className='mt-8 border-t border-[var(--border-color)] pt-6'>
-          <p className='text-sm font-medium text-secondary'>Or reach me directly</p>
-          <div className='mt-4 flex flex-col gap-3'>
-            {contactChannels.map(({ label, value, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className='theme-focus group flex items-center gap-3 rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)] px-4 py-3 transition hover:border-[var(--accent)]'
-              >
-                <span className='flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]'>
-                  <Icon size={18} aria-hidden='true' />
-                </span>
-                <span className='flex flex-col'>
-                  <span className='text-xs font-semibold uppercase tracking-wide text-secondary'>{label}</span>
-                  <span className='text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)]'>
-                    {value}
-                  </span>
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        ref={earthRef}
-        variants={slideIn("right", "tween", 0.2, 1)}
-        className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
-      >
-        {showEarth && (
-          <Suspense fallback={null}>
-            <EarthCanvas />
-          </Suspense>
-        )}
       </motion.div>
     </div>
   );

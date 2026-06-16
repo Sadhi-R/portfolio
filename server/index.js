@@ -30,6 +30,7 @@ app.use(
 app.use(express.json());
 
 const hasGmailCreds = !!(process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD);
+const isProduction = process.env.NODE_ENV === 'production';
 
 function parseList(val) {
   if (!val) return [];
@@ -81,7 +82,8 @@ app.post('/api/contact', async (req, res) => {
     const bccList = parseList(process.env.BCC_EMAILS);
 
     const fallbackTo = process.env.GMAIL_USER ? [process.env.GMAIL_USER] : [];
-    const finalTo = toList.length ? toList : fallbackTo;
+    const devTo = !isProduction && !hasGmailCreds ? ['dev@example.local'] : [];
+    const finalTo = toList.length ? toList : fallbackTo.length ? fallbackTo : devTo;
 
     if (!finalTo.length) {
       return res.status(500).json({ error: 'Server email not configured (set TO_EMAIL or GMAIL_USER)' });

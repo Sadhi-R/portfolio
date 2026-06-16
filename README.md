@@ -1,6 +1,6 @@
-# Sadhi Ramtenki Portfolio
+# Sadaiah Ramtenki Portfolio
 
-A modern personal portfolio website for Sadhi Ramtenki, built to showcase software engineering experience, skills, projects, resume access, and contact options in a clean responsive interface.
+A modern personal portfolio website for Sadaiah Ramtenki, built to showcase software engineering experience, skills, projects, resume access, and contact options in a clean responsive interface.
 
 Live portfolio: https://sadhi.onrender.com/
 
