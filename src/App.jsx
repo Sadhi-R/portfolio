@@ -16,10 +16,9 @@ import {
 } from "./components";
 import Footer from "./components/Footer";
 import FloatingContact from "./components/FloatingContact";
+import MouseEffects from "./components/effects/MouseEffects";
 
-// Three.js is heavy, so the starfield is split into its own async chunk and
-// only mounted once the browser is idle. This keeps the initial load fast.
-const StarsCanvas = lazy(() => import("./components/canvas/Stars"));
+const AIBackground = lazy(() => import("./components/canvas/AIBackground"));
 
 const getInitialTheme = () => {
   const currentTheme = document.documentElement.getAttribute("data-theme");
@@ -28,12 +27,12 @@ const getInitialTheme = () => {
   const savedTheme = window.localStorage.getItem("theme");
   if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
 
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "dark";
 };
 
 const App = () => {
   const [theme, setTheme] = useState(getInitialTheme);
-  const [showStars, setShowStars] = useState(false);
+  const [showEffects, setShowEffects] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const progressScale = useSpring(scrollYProgress, {
@@ -48,13 +47,13 @@ const App = () => {
   }, [theme]);
 
   useEffect(() => {
-    // Defer the WebGL starfield until the browser is idle so it never
-    // competes with painting the actual content.
-    const idle =
-      window.requestIdleCallback || ((cb) => window.setTimeout(cb, 1200));
-    const cancelIdle =
-      window.cancelIdleCallback || window.clearTimeout;
-    const handle = idle(() => setShowStars(true));
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) return undefined;
+
+    const idle = window.requestIdleCallback || ((cb) => window.setTimeout(cb, 600));
+    const cancelIdle = window.cancelIdleCallback || window.clearTimeout;
+    const handle = idle(() => setShowEffects(true));
+
     return () => cancelIdle(handle);
   }, []);
 
@@ -62,6 +61,7 @@ const App = () => {
 
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <MouseEffects />
       <motion.div
         className='fixed left-0 top-0 z-[60] h-1 w-full origin-left bg-[var(--accent)]'
         style={{ scaleX: progressScale }}
@@ -71,12 +71,16 @@ const App = () => {
       <FloatingContact />
       <div className='app-shell relative z-0 min-h-screen bg-primary text-[var(--text-primary)] transition-colors duration-300'>
         <div className='ambient-background' aria-hidden='true'>
+          <div className='ai-mesh-gradient' />
+          <div className='ambient-spotlight-glow' />
+          <div className='ambient-orb ambient-orb-one' />
           <div className='ambient-grid' />
-          <div className='ambient-lines ambient-lines-one' />
-          <div className='ambient-lines ambient-lines-two' />
-          <div className='ambient-panel ambient-panel-one' />
-          <div className='ambient-panel ambient-panel-two' />
         </div>
+        {showEffects && (
+          <Suspense fallback={null}>
+            <AIBackground theme={theme} />
+          </Suspense>
+        )}
         <div className='hero-bg bg-hero-pattern bg-cover bg-no-repeat bg-center'>
           <Hero />
         </div>
@@ -89,11 +93,6 @@ const App = () => {
         <AITechnology />
         <div className='relative z-0'>
           <Contact />
-          {showStars && (
-            <Suspense fallback={null}>
-              <StarsCanvas />
-            </Suspense>
-          )}
           <Footer />
         </div>
       </div>

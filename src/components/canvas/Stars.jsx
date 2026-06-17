@@ -1,6 +1,9 @@
-import { useState, useRef, Suspense } from "react";
+import { useRef, useState, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Preload } from "@react-three/drei";
+import { Points, PointMaterial, Sparkles, Preload } from "@react-three/drei";
+import { easing } from "maath";
+
+const ACCENT = { dark: "#7c3aed", light: "#6d28d9" };
 
 const createSpherePoints = (count, radius) => {
   const points = new Float32Array(count * 3);
@@ -21,43 +24,56 @@ const createSpherePoints = (count, radius) => {
   return points;
 };
 
-const Stars = (props) => {
-  const ref = useRef();
-  const [sphere] = useState(() => createSpherePoints(1600, 1.2));
+const Stars = ({ theme = "dark" }) => {
+  const outerRef = useRef();
+  const innerRef = useRef();
+  const accent = theme === "light" ? ACCENT.light : ACCENT.dark;
+  const [sphere] = useState(() => createSpherePoints(1800, 1.4));
 
   useFrame((state, delta) => {
-    if (!ref.current) return;
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (innerRef.current) {
+      innerRef.current.rotation.x -= delta / 12;
+      innerRef.current.rotation.y -= delta / 16;
+    }
+
+    if (outerRef.current) {
+      easing.damp3(
+        outerRef.current.rotation,
+        [state.pointer.y * 0.1, state.pointer.x * 0.1, 0],
+        0.2,
+        delta
+      );
+    }
   });
 
   return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
-        <PointMaterial
-          transparent
-          color='#f272c8'
-          size={0.002}
-          sizeAttenuation={true}
-          depthWrite={false}
-        />
-      </Points>
+    <group ref={outerRef}>
+      <group ref={innerRef} rotation={[0, 0, Math.PI / 4]}>
+        <Points positions={sphere} stride={3} frustumCulled>
+          <PointMaterial
+            transparent
+            color={accent}
+            size={0.0022}
+            sizeAttenuation
+            depthWrite={false}
+            opacity={0.75}
+          />
+        </Points>
+        <Sparkles count={55} scale={3.5} size={1.5} speed={0.25} color={accent} opacity={0.4} />
+      </group>
     </group>
   );
 };
 
-const StarsCanvas = () => {
-  return (
-    <div className='w-full h-auto absolute inset-0 z-[-1]'>
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <Suspense fallback={null}>
-          <Stars />
-        </Suspense>
-
+const StarsCanvas = ({ theme = "dark" }) => (
+  <div className='stars-canvas' aria-hidden='true'>
+    <Canvas camera={{ position: [0, 0, 1] }} dpr={[1, 1.5]}>
+      <Suspense fallback={null}>
+        <Stars theme={theme} />
         <Preload all />
-      </Canvas>
-    </div>
-  );
-};
+      </Suspense>
+    </Canvas>
+  </div>
+);
 
 export default StarsCanvas;

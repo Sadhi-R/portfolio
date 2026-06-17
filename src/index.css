@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -18,8 +18,16 @@
   --success: #14b8a6;
   --border-color: rgba(148, 163, 184, 0.24);
   --shadow-color: rgba(0, 0, 0, 0.28);
-  --hero-overlay: linear-gradient(90deg, rgba(8, 10, 18, 0.98), rgba(8, 10, 18, 0.86));
+  --hero-overlay: linear-gradient(90deg, rgba(8, 10, 18, 0.78), rgba(8, 10, 18, 0.58));
   --hero-accent-panel: rgba(124, 58, 237, 0.14);
+  --glass-bg: rgba(21, 26, 44, 0.55);
+  --glass-border: rgba(148, 163, 184, 0.18);
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --mouse-x-pct: 50%;
+  --mouse-y-pct: 50%;
+  --mouse-parallax-x: 0;
+  --mouse-parallax-y: 0;
 }
 
 [data-theme="light"] {
@@ -36,17 +44,28 @@
   --success: #0f766e;
   --border-color: rgba(100, 116, 139, 0.22);
   --shadow-color: rgba(15, 23, 42, 0.12);
-  --hero-overlay: linear-gradient(90deg, rgba(247, 248, 251, 0.98), rgba(247, 248, 251, 0.9));
+  --hero-overlay: linear-gradient(90deg, rgba(247, 248, 251, 0.82), rgba(247, 248, 251, 0.62));
   --hero-accent-panel: rgba(109, 40, 217, 0.09);
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(100, 116, 139, 0.16);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   scroll-behavior: smooth;
   letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Archivo", sans-serif;
 }
 
 html,
@@ -66,6 +85,21 @@ body {
     linear-gradient(180deg, var(--bg-primary) 0%, color-mix(in srgb, var(--surface-bg) 28%, var(--bg-primary)) 100%);
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
+  cursor: default;
+}
+
+a[href],
+button,
+[role="button"],
+label[for],
+.cursor-pointer {
+  cursor: pointer;
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  cursor: text;
 }
 
 a,
@@ -114,9 +148,89 @@ img {
   overflow: hidden;
   pointer-events: none;
   perspective: 1200px;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
-.app-shell > :not(.ambient-background) {
+.ambient-spotlight-glow {
+  position: absolute;
+  width: min(72vw, 760px);
+  height: min(72vw, 760px);
+  left: var(--mouse-x-pct);
+  top: var(--mouse-y-pct);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) 18%, transparent) 0%,
+    color-mix(in srgb, var(--success) 8%, transparent) 34%,
+    transparent 72%
+  );
+  filter: blur(18px);
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  opacity: 0.45;
+  animation: orbPulse 12s ease-in-out infinite;
+}
+
+.ambient-orb-one {
+  width: 28vw;
+  height: 28vw;
+  min-width: 220px;
+  min-height: 220px;
+  top: 12%;
+  left: calc(8% + var(--mouse-parallax-x) * 18px);
+  background: color-mix(in srgb, var(--accent) 42%, transparent);
+}
+
+.ambient-orb-two {
+  width: 22vw;
+  height: 22vw;
+  min-width: 180px;
+  min-height: 180px;
+  right: 6%;
+  bottom: 18%;
+  background: color-mix(in srgb, var(--success) 34%, transparent);
+  animation-delay: -4s;
+  transform: translate(calc(var(--mouse-parallax-x) * -14px), calc(var(--mouse-parallax-y) * -10px));
+}
+
+.ambient-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.ai-mesh-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 40%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 85% 25%, color-mix(in srgb, var(--success) 14%, transparent), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 80%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 45%);
+  animation: aiMeshShift 18s ease-in-out infinite alternate;
+}
+
+.ai-background-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.ai-background-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.app-shell > :not(.ambient-background):not(.ai-background-canvas) {
   position: relative;
   z-index: 1;
 }
@@ -124,12 +238,16 @@ img {
 .ambient-grid {
   position: absolute;
   inset: -20% -10%;
-  opacity: 0.55;
+  opacity: 0.32;
   background-image:
     linear-gradient(color-mix(in srgb, var(--accent) 34%, transparent) 1.4px, transparent 1.4px),
     linear-gradient(90deg, color-mix(in srgb, var(--accent) 34%, transparent) 1.4px, transparent 1.4px);
   background-size: 72px 72px;
-  transform: rotateX(62deg) rotateZ(-8deg) translateY(10%);
+  transform:
+    rotateX(62deg)
+    rotateZ(-8deg)
+    translateY(10%)
+    translate3d(calc(var(--mouse-parallax-x) * 12px), calc(var(--mouse-parallax-y) * 8px), 0);
   animation: gridDrift 28s linear infinite;
 }
 
@@ -155,12 +273,20 @@ img {
 .ambient-lines-one {
   top: -12%;
   right: -12%;
+  transform:
+    rotateX(58deg)
+    rotateZ(18deg)
+    translate3d(calc(var(--mouse-parallax-x) * -20px), calc(var(--mouse-parallax-y) * 14px), 0);
   animation: lineFloat 22s ease-in-out infinite alternate;
 }
 
 .ambient-lines-two {
   bottom: 6%;
   left: -18%;
+  transform:
+    rotateX(58deg)
+    rotateZ(18deg)
+    translate3d(calc(var(--mouse-parallax-x) * 16px), calc(var(--mouse-parallax-y) * -12px), 0);
   animation: lineFloat 28s ease-in-out infinite alternate-reverse;
 }
 
@@ -193,15 +319,34 @@ img {
 
 .hero-bg {
   position: relative;
+  overflow: hidden;
+}
+
+.hero-particles-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+.stars-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 .hero-bg::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--hero-overlay);
+  background:
+    radial-gradient(circle at var(--mouse-x-pct) var(--mouse-y-pct), color-mix(in srgb, var(--accent) 14%, transparent) 0%, transparent 48%),
+    var(--hero-overlay);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .hero-bg::after {
@@ -211,12 +356,12 @@ img {
   height: 42%;
   background: linear-gradient(180deg, transparent, var(--bg-primary));
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
-.hero-bg > * {
+.hero-bg > *:not(.hero-particles-canvas) {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .surface-card {
@@ -265,6 +410,121 @@ img {
 
 .btn-primary:hover {
   background: var(--accent-strong);
+}
+
+.hero-gradient-text {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--success) 55%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-chip,
+.glass-stat,
+.glass-button,
+.glass-portrait {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-chip {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--shadow-color) 65%, transparent);
+}
+
+.glass-stat {
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass-bg) 88%, transparent);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.glass-stat:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border-color));
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.glass-button {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+}
+
+.glass-button:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--border-color));
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.glass-portrait {
+  background: color-mix(in srgb, var(--glass-bg) 90%, transparent);
+}
+
+.shadow-glow {
+  box-shadow:
+    0 12px 40px color-mix(in srgb, var(--accent) 28%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.tilt-portrait {
+  perspective: 1000px;
+}
+
+.portrait-glow {
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 24%, transparent), transparent 68%);
+  filter: blur(24px);
+  transform: scale(0.96);
+}
+
+.scroll-indicator {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.scroll-indicator:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border-color));
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.ai-card {
+  transition: transform 0.3s ease;
+}
+
+.ai-card:hover {
+  transform: translateY(-6px);
+}
+
+.ai-card-border {
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.ai-card:hover .ai-card-border {
+  opacity: 1;
+}
+
+.ai-card-inner {
+  background: color-mix(in srgb, var(--card-bg) 96%, transparent) !important;
+}
+
+.ai-card-glow {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ai-card:hover .ai-card-glow {
+  opacity: 1;
+}
+
+@keyframes orbPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.06);
+  }
 }
 
 .skill-stage {
@@ -329,6 +589,17 @@ img {
 
 .skill-card-3d:hover .skill-card-shine {
   transform: translateX(48%) rotate(8deg);
+}
+
+@keyframes aiMeshShift {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.04) translate(1.5%, -1%);
+    opacity: 1;
+  }
 }
 
 @keyframes gridDrift {
@@ -432,6 +703,15 @@ h6 {
     opacity: 0.32;
   }
 
+  .ambient-spotlight-glow,
+  .ambient-orb {
+    opacity: 0.28;
+  }
+
+  .hero-particles-canvas {
+    opacity: 0.65;
+  }
+
   .skill-card-3d,
   .skill-card-inner {
     min-height: 118px;
@@ -451,6 +731,10 @@ h6 {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .ai-background-canvas {
+    display: none !important;
   }
 }
 

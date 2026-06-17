@@ -9,8 +9,8 @@
     <title>Sadaiah Ramtenki's Portfolio</title>
     <script>
       const savedTheme = localStorage.getItem("theme");
-      const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      document.documentElement.setAttribute("data-theme", savedTheme || preferredTheme);
+      const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
     </script>
     <style>
       :root {
