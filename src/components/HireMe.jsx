@@ -18,7 +18,7 @@ const HireMe = () => {
         <div className='overflow-hidden rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)]'>
           <img
             src={sadhi2}
-            alt='Sadaiah Ramtenki profile portrait'
+            alt='Sadhi Ramtenki profile portrait'
             loading='lazy'
             decoding='async'
             className='profile-portrait aspect-[4/5] w-full object-cover'

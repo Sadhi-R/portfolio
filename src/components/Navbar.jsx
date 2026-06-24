@@ -122,9 +122,9 @@ const Navbar = ({ theme, onToggleTheme }) => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt='Sadaiah Ramtenki logo' className='h-10 w-10 rounded-full object-contain' />
+          <img src={logo} alt='Sadhi Ramtenki logo' className='h-10 w-10 rounded-full object-contain' />
           <p className='flex cursor-pointer flex-col text-sm font-bold leading-tight text-[var(--text-primary)] sm:text-base'>
-            Sadaiah Ramtenki
+            Sadhi Ramtenki
             <span className='text-xs font-medium text-secondary sm:text-sm'>Software Engineer</span>
           </p>
         </Link>

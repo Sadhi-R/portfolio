@@ -75,7 +75,7 @@ const Hero = () => {
 
           <motion.h1 variants={fadeIn("up", "spring", 0.1, 0.9)} className={styles.heroHeadText}>
             Hi, I&apos;m{" "}
-            <span className='hero-gradient-text'>Sadaiah Ramtenki</span>
+            <span className='hero-gradient-text'>Sadhi Ramtenki</span>
           </motion.h1>
           <motion.p
             variants={fadeIn("up", "spring", 0.2, 0.9)}
@@ -126,11 +126,11 @@ const Hero = () => {
               <div className='relative overflow-hidden rounded-2xl bg-[var(--surface-soft)]'>
                 <img
                   src={profile}
-                  alt='Sadaiah Ramtenki profile'
+                  alt='Sadhi Ramtenki profile'
                   className='profile-portrait h-[320px] w-full object-cover sm:h-[380px] lg:h-[420px]'
                 />
                 <div className='absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-5 text-white'>
-                  <p className='text-lg font-bold text-white'>Sadaiah Ramtenki</p>
+                  <p className='text-lg font-bold text-white'>Sadhi Ramtenki</p>
                   <p className='mt-1 text-sm text-white/85'>Software Engineer</p>
                 </div>
               </div>
