@@ -15,7 +15,6 @@ import {
   Works,
 } from "./components";
 import Footer from "./components/Footer";
-import FloatingContact from "./components/FloatingContact";
 import MouseEffects from "./components/effects/MouseEffects";
 
 const AIBackground = lazy(() => import("./components/canvas/AIBackground"));
@@ -68,7 +67,6 @@ const App = () => {
         aria-hidden='true'
       />
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
-      <FloatingContact />
       <div className='app-shell relative z-0 min-h-screen bg-primary text-[var(--text-primary)] transition-colors duration-300'>
         <div className='ambient-background' aria-hidden='true'>
           <div className='ai-mesh-gradient' />

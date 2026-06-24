@@ -536,6 +536,183 @@ img {
   opacity: 1;
 }
 
+/* Contact section */
+.contact-channel-card {
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--card-bg) 90%, transparent);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-channel-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--border-color));
+  box-shadow: 0 12px 36px color-mix(in srgb, var(--accent) 10%, transparent);
+  transform: translateX(4px);
+}
+
+.contact-location-chip {
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: fit-content;
+}
+
+.contact-form-panel {
+  border-radius: 1rem;
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-field-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.contact-field-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.contact-field-input-wrap--textarea {
+  align-items: flex-start;
+}
+
+.contact-field-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.contact-field-input-wrap--textarea .contact-field-icon {
+  top: 1.125rem;
+  transform: none;
+}
+
+.contact-field-input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--surface-soft);
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-field-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.65;
+}
+
+.contact-field-input:focus {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-color));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+  background: color-mix(in srgb, var(--surface-soft) 80%, var(--card-bg));
+}
+
+.contact-field-textarea {
+  min-height: 8.5rem;
+  resize: vertical;
+  padding-top: 0.875rem;
+  line-height: 1.6;
+}
+
+.contact-submit-btn {
+  margin-top: 0.25rem;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .contact-submit-btn {
+    width: fit-content;
+  }
+}
+
+/* AI & Technology bento section */
+.ai-bento-card {
+  transition: transform 0.3s ease;
+}
+
+.ai-bento-card:hover {
+  transform: translateY(-5px);
+}
+
+.ai-bento-card:hover .ai-card-border {
+  opacity: 1;
+}
+
+.ai-bento-inner {
+  background: color-mix(in srgb, var(--card-bg) 96%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border-color) 80%, transparent);
+  transition: border-color 0.3s ease;
+}
+
+.ai-bento-card:hover .ai-bento-inner {
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--border-color));
+}
+
+.ai-bento-inner--featured {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, var(--card-bg)), var(--card-bg) 55%),
+    var(--card-bg);
+}
+
+.ai-bento-glow {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ai-bento-card:hover .ai-bento-glow {
+  opacity: 1;
+}
+
+.ai-bento-icon {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.ai-bento-badge {
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border-color));
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+
+.ai-tools-panel {
+  border: 1px solid var(--glass-border);
+  background: color-mix(in srgb, var(--glass-bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ai-tool-tag {
+  border: 1px solid var(--border-color);
+  background: color-mix(in srgb, var(--surface-soft) 90%, transparent);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.ai-bento-card:hover .ai-tool-tag {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border-color));
+}
+
+.ai-stat-chip {
+  min-width: 7.5rem;
+}
+
 @keyframes orbPulse {
   0%,
   100% {
