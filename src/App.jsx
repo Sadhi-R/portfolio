@@ -81,7 +81,7 @@ const App = () => {
             <AIBackground theme={theme} />
           </Suspense>
         )}
-        <div className='hero-bg bg-hero-pattern bg-cover bg-no-repeat bg-center'>
+        <div className='hero-bg'>
           <Hero />
         </div>
         <About />

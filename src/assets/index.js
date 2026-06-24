@@ -1,5 +1,6 @@
 import logo from "./logo.png";
-import profile from "./profile.png";
+import profile from "./Sadhi1.png";
+import sadhi2 from "./Sadhi2.png";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
@@ -33,6 +34,7 @@ import ServiceEdge from './company/ServiceEdge.png';
 export {
   logo,
   profile,
+  sadhi2,
   backend,
   creator,
   mobile,

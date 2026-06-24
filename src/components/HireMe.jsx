@@ -1,6 +1,6 @@
 import { FiDownload, FiMail, FiMapPin } from "react-icons/fi";
 
-import { profile } from "../assets";
+import { sadhi2 } from "../assets";
 import resumeFile from "../assets/Updated-Resume.pdf";
 import { SectionWrapper } from "../hoc";
 
@@ -17,7 +17,7 @@ const HireMe = () => {
       <div className='mx-auto w-full max-w-[340px] lg:mx-0'>
         <div className='overflow-hidden rounded-lg border border-[var(--border-color)] bg-[var(--surface-soft)]'>
           <img
-            src={profile}
+            src={sadhi2}
             alt='Sadaiah Ramtenki profile portrait'
             loading='lazy'
             decoding='async'

@@ -8,38 +8,71 @@ import { logo } from "../assets";
 
 const NAV_OFFSET = 80;
 
+const getSection = (id) => {
+  const anchor = document.getElementById(id);
+  return anchor ? anchor.closest("section") || anchor : null;
+};
+
 const Navbar = ({ theme, onToggleTheme }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const getSection = (id) => {
-    const anchor = document.getElementById(id);
-    return anchor ? anchor.closest("section") || anchor : null;
-  };
-
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
-
-      // Scroll-spy: highlight the section currently in view.
-      const current = navLinks
-        .map((nav) => {
-          const section = getSection(nav.id);
-          if (!section) return null;
-          return { title: nav.title, top: section.getBoundingClientRect().top };
-        })
-        .filter(Boolean)
-        .filter((item) => item.top - NAV_OFFSET - 8 <= 0)
-        .pop();
-
-      if (current) setActive(current.title);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 80);
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((nav) => {
+        const section = getSection(nav.id);
+        return section ? { ...nav, section } : null;
+      })
+      .filter(Boolean);
+
+    if (!sections.length) return undefined;
+
+    const visible = new Map();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const navId = entry.target.dataset.navId;
+          if (!navId) return;
+
+          if (entry.isIntersecting) {
+            visible.set(navId, entry.intersectionRatio);
+          } else {
+            visible.delete(navId);
+          }
+        });
+
+        const activeSection = [...sections]
+          .reverse()
+          .find((nav) => visible.has(nav.id));
+
+        setActive(activeSection?.title ?? "");
+      },
+      {
+        rootMargin: `-${NAV_OFFSET + 24}px 0px -50% 0px`,
+        threshold: [0, 0.1, 0.25, 0.5],
+      }
+    );
+
+    sections.forEach((nav) => {
+      nav.section.dataset.navId = nav.id;
+      observer.observe(nav.section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const getNavLinkClass = (title) =>
+    `nav-link${active === title ? " nav-link-active" : ""}`;
 
   const handleNavClick = (event, nav) => {
     event.preventDefault();
@@ -97,15 +130,15 @@ const Navbar = ({ theme, onToggleTheme }) => {
         </Link>
 
         <div className='hidden items-center gap-5 lg:flex'>
-          <ul className='flex list-none flex-row gap-5'>
+          <ul className='flex list-none flex-row gap-2'>
             {navLinks.map((nav) => (
-              <li
-                key={nav.id}
-                className={`cursor-pointer text-[15px] font-medium transition ${
-                  active === nav.title ? "text-[var(--text-primary)]" : "text-secondary"
-                } hover:text-[var(--text-primary)]`}
-              >
-                <a href={`#${nav.id}`} onClick={(event) => handleNavClick(event, nav)}>
+              <li key={nav.id}>
+                <a
+                  href={`#${nav.id}`}
+                  onClick={(event) => handleNavClick(event, nav)}
+                  className={getNavLinkClass(nav.title)}
+                  aria-current={active === nav.title ? "page" : undefined}
+                >
                   {nav.title}
                 </a>
               </li>
@@ -130,15 +163,15 @@ const Navbar = ({ theme, onToggleTheme }) => {
               !toggle ? "hidden" : "flex"
             } absolute right-5 top-16 my-2 min-w-[210px] rounded-lg border border-[var(--border-color)] bg-[var(--surface-bg)]/95 p-5 shadow-card backdrop-blur-md sm:right-8`}
           >
-            <ul className='flex list-none flex-1 flex-col items-start justify-end gap-4'>
+            <ul className='flex list-none flex-1 flex-col items-start justify-end gap-2'>
               {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`cursor-pointer text-[16px] font-medium ${
-                    active === nav.title ? "text-[var(--text-primary)]" : "text-secondary"
-                  }`}
-                >
-                  <a href={`#${nav.id}`} onClick={(event) => handleNavClick(event, nav)}>
+                <li key={nav.id} className='w-full'>
+                  <a
+                    href={`#${nav.id}`}
+                    onClick={(event) => handleNavClick(event, nav)}
+                    className={`${getNavLinkClass(nav.title)} w-full text-[16px]`}
+                    aria-current={active === nav.title ? "page" : undefined}
+                  >
                     {nav.title}
                   </a>
                 </li>
