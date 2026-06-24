@@ -20,17 +20,17 @@ import vscode from './tech/vscode.png';
 import fork from './tech/fork.png';
 import cursor from './tech/cursor.png';
 import postgresql from './tech/postgresql.png';
-import d3eproject from './company/d3eproject.jpg';
-import eventSphereProject from './company/eventSphereProject.png';
-import findNOK from './company/findNOK.png';
-import hostelproproject from './company/hostelproproject.png';
-import rewahrproject from './company/rewahrproject.jpg';
-import syllabusmanagemenProject from './company/syllabusmanagemenProject.png';
-import LeadProject from './company/LeadProject.png';
-import rmsProject from './company/rmsProject.png';
-import digitalMenu from './company/digitalMenu.png';
-import CaseManagementSystem from './company/CaseManagementSystem.png';
-import ServiceEdge from './company/ServiceEdge.png';
+import d3eproject from './company/projects/d3estudio.png';
+import eventSphereProject from './company/projects/dwseventmngmt.png';
+import findNOK from './company/projects/findnok.png';
+import hostelproproject from './company/projects/hostelmngmt.png';
+import rewahrproject from './company/projects/rewahr.png';
+import syllabusmanagemenProject from './company/projects/syllabusmngmt.png';
+import LeadProject from './company/projects/leadmngmt.png';
+import rmsProject from './company/projects/restaturentmngmt.png';
+import digitalMenu from './company/projects/digitalmenu.png';
+import CaseManagementSystem from './company/projects/casemngmt.png';
+import ServiceEdge from './company/projects/serviceedge.png';
 export {
   logo,
   profile,

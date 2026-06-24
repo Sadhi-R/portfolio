@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sadhi Ramtenki portfolio — loading" />
+    <title>Loading Portfolio | Sadhi Ramtenki</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #080a12;
+        --surface: #151a2c;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --accent: #7c3aed;
+        --success: #14b8a6;
+        --border: rgba(148, 163, 184, 0.24);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow: hidden;
+      }
+
+      .ambient {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.18), transparent 42%),
+          radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.12), transparent 38%),
+          linear-gradient(180deg, var(--bg), #0d1220);
+      }
+
+      .grid {
+        position: fixed;
+        inset: 0;
+        opacity: 0.35;
+        background-image:
+          linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(circle at center, black 35%, transparent 80%);
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        width: min(100%, 460px);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+        padding: 32px 28px;
+        text-align: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 22px;
+      }
+
+      .pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.55);
+        animation: pulse 1.8s ease-out infinite;
+      }
+
+      h1 {
+        font-family: "Archivo", sans-serif;
+        font-size: clamp(1.6rem, 4vw, 2rem);
+        font-weight: 900;
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+
+      h1 span {
+        background: linear-gradient(135deg, var(--accent), var(--success), #a855f7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 28px;
+      }
+
+      .progress-track {
+        height: 6px;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.16);
+        overflow: hidden;
+        margin-bottom: 14px;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), var(--success));
+        transition: width 0.45s ease;
+      }
+
+      .status {
+        min-height: 1.4rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--muted);
+      }
+
+      .hint {
+        margin-top: 18px;
+        font-size: 0.78rem;
+        color: color-mix(in srgb, var(--muted) 85%, transparent);
+        line-height: 1.5;
+      }
+
+      .retry {
+        display: none;
+        margin-top: 18px;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        border-radius: 10px;
+        padding: 10px 16px;
+        font: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .retry:hover {
+        border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+      }
+
+      .retry.visible {
+        display: inline-flex;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(124, 58, 237, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .pulse {
+          animation: none;
+        }
+        .progress-bar {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="grid" aria-hidden="true"></div>
+
+    <main>
+      <div class="card" role="status" aria-live="polite">
+        <div class="badge">
+          <span class="pulse" aria-hidden="true"></span>
+          Starting up
+        </div>
+        <h1>Sadhi <span>Ramtenki</span></h1>
+        <p class="subtitle">
+          The portfolio server is waking up. This usually takes under a minute on the first visit.
+        </p>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-bar" id="progress"></div>
+        </div>
+        <p class="status" id="status">Connecting to server...</p>
+        <p class="hint">Free hosting spins down after inactivity. Your page will load automatically once ready.</p>
+        <button type="button" class="retry" id="retry">Try again</button>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var TARGET = (params.get("target") || "https://sadhi.onrender.com").replace(/\/+$/, "");
+        var HEALTH_URL = TARGET + "/api/health";
+        var INTERVAL_MS = 2000;
+        var MAX_ATTEMPTS = 45;
+        var attempt = 0;
+        var timer = null;
+
+        var statusEl = document.getElementById("status");
+        var progressEl = document.getElementById("progress");
+        var retryEl = document.getElementById("retry");
+
+        var messages = [
+          "Connecting to server...",
+          "Waking up the instance...",
+          "Allocating resources...",
+          "Preparing your portfolio...",
+          "Almost ready...",
+        ];
+
+        function setProgress() {
+          var pct = Math.min(96, Math.round((attempt / MAX_ATTEMPTS) * 100));
+          progressEl.style.width = pct + "%";
+        }
+
+        function setStatus(text) {
+          statusEl.textContent = text;
+        }
+
+        function redirect() {
+          progressEl.style.width = "100%";
+          setStatus("Ready. Opening portfolio...");
+          window.location.replace(TARGET + "/");
+        }
+
+        function checkHealth() {
+          attempt += 1;
+          setProgress();
+          setStatus(messages[Math.min(messages.length - 1, Math.floor(attempt / 4))]);
+
+          return fetch(HEALTH_URL, {
+            method: "GET",
+            cache: "no-store",
+            mode: "cors",
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error("not ready");
+              return res.json();
+            })
+            .then(function (data) {
+              if (data && data.ok) redirect();
+              else throw new Error("not ready");
+            })
+            .catch(function () {
+              if (attempt >= MAX_ATTEMPTS) {
+                clearInterval(timer);
+                setStatus("Still waking up. Please try again in a moment.");
+                retryEl.classList.add("visible");
+                return;
+              }
+            });
+        }
+
+        function startPolling() {
+          attempt = 0;
+          retryEl.classList.remove("visible");
+          progressEl.style.width = "0%";
+          setStatus(messages[0]);
+          checkHealth();
+          timer = setInterval(checkHealth, INTERVAL_MS);
+        }
+
+        retryEl.addEventListener("click", function () {
+          clearInterval(timer);
+          startPolling();
+        });
+
+        startPolling();
+      })();
+    </script>
+  </body>
+</html>

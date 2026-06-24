@@ -16,13 +16,17 @@
       :root {
         --boot-bg: #080a12;
         --boot-fg: #f8fafc;
+        --boot-muted: #94a3b8;
         --boot-accent: #7c3aed;
+        --boot-success: #14b8a6;
         --boot-border: rgba(148, 163, 184, 0.24);
       }
       [data-theme="light"] {
         --boot-bg: #f7f8fb;
         --boot-fg: #0f172a;
+        --boot-muted: #526071;
         --boot-accent: #6d28d9;
+        --boot-success: #0f766e;
         --boot-border: rgba(100, 116, 139, 0.22);
       }
       html,
@@ -38,35 +42,80 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 22px;
-        background: var(--boot-bg);
+        gap: 18px;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.14), transparent 42%),
+          radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.1), transparent 38%),
+          var(--boot-bg);
         color: var(--boot-fg);
-        font-family: "Poppins", system-ui, sans-serif;
+        font-family: "Space Grotesk", system-ui, sans-serif;
       }
-      #app-splash .splash-ring {
-        width: 52px;
-        height: 52px;
+      #app-splash .splash-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid var(--boot-border);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--boot-muted);
+      }
+      #app-splash .splash-dot {
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
-        border: 3px solid var(--boot-border);
-        border-top-color: var(--boot-accent);
-        animation: splash-spin 0.8s linear infinite;
+        background: var(--boot-accent);
+        animation: splash-pulse 1.8s ease-out infinite;
       }
       #app-splash .splash-name {
-        font-size: 15px;
-        font-weight: 600;
-        letter-spacing: 0.04em;
+        font-family: "Archivo", system-ui, sans-serif;
+        font-size: clamp(1.35rem, 4vw, 1.75rem);
+        font-weight: 900;
+        letter-spacing: -0.02em;
       }
       #app-splash .splash-name span {
-        color: var(--boot-accent);
+        background: linear-gradient(135deg, var(--boot-accent), var(--boot-success), #a855f7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
-      @keyframes splash-spin {
-        to {
-          transform: rotate(360deg);
-        }
+      #app-splash .splash-status {
+        font-size: 0.875rem;
+        color: var(--boot-muted);
+      }
+      #app-splash .splash-track {
+        width: min(240px, 70vw);
+        height: 5px;
+        border-radius: 999px;
+        background: rgba(148, 163, 184, 0.16);
+        overflow: hidden;
+      }
+      #app-splash .splash-bar {
+        height: 100%;
+        width: 35%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--boot-accent), var(--boot-success));
+        animation: splash-progress 1.4s ease-in-out infinite;
+      }
+      @keyframes splash-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.5); }
+        70% { box-shadow: 0 0 0 8px rgba(124, 58, 237, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+      }
+      @keyframes splash-progress {
+        0% { transform: translateX(-120%); }
+        100% { transform: translateX(320%); }
       }
       @media (prefers-reduced-motion: reduce) {
-        #app-splash .splash-ring {
-          animation-duration: 1.6s;
+        #app-splash .splash-dot,
+        #app-splash .splash-bar {
+          animation: none;
+        }
+        #app-splash .splash-bar {
+          width: 55%;
         }
       }
     </style>
@@ -74,8 +123,15 @@
   <body>
     <div id="root">
       <div id="app-splash" aria-hidden="true">
-        <div class="splash-ring"></div>
+        <div class="splash-badge">
+          <span class="splash-dot"></span>
+          Loading portfolio
+        </div>
         <div class="splash-name">Sadhi <span>Ramtenki</span></div>
+        <div class="splash-track" aria-hidden="true">
+          <div class="splash-bar"></div>
+        </div>
+        <div class="splash-status">Preparing your experience...</div>
       </div>
     </div>
     <script type="module" src="/src/main.jsx"></script>

@@ -1,0 +1,37 @@
+# Recommended Render setup to avoid cold-start delays for visitors.
+#
+# 1) Static Site (portfolio UI) — always fast, no spin-down
+# 2) Web Service (contact API only) — may cold-start on first form submit
+#
+# After deploy, set CORS_ORIGINS on the API service to your static site URL.
+
+services:
+  - type: web
+    name: sadhi-portfolio-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: node server/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SERVE_STATIC
+        value: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      - key: TO_EMAIL
+        sync: false
+
+  - type: web
+    name: sadhi-portfolio
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://sadhi-portfolio-api.onrender.com/api

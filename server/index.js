@@ -114,16 +114,28 @@ app.post('/api/contact', async (req, res) => {
 });
 
 app.get('/api/health', (req, res) => {
+  res.set('Cache-Control', 'no-store');
   res.json({ ok: true, smtp: hasGmailCreds ? 'gmail' : 'dev-stream' });
 });
 
-// Serve frontend build (if present). On Render, build runs before start, so dist exists.
+const serveStatic = process.env.SERVE_STATIC !== 'false';
 const distPath = path.resolve(__dirname, '../dist');
-if (fs.existsSync(distPath)) {
-  app.use(express.static(distPath));
+
+if (serveStatic && fs.existsSync(distPath)) {
+  app.use(express.static(distPath, { maxAge: '1d', index: false }));
+
+  // Branded standby page (also copied to dist/standby.html via Vite public/)
+  app.get('/standby', (req, res) => {
+    res.sendFile(path.join(distPath, 'standby.html'));
+  });
+
   // React Router catch-all for non-API GETs (Express 5-safe using RegExp)
   app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(distPath, 'index.html'));
+  });
+} else if (!serveStatic) {
+  app.get('/', (req, res) => {
+    res.json({ ok: true, service: 'portfolio-api' });
   });
 } else {
   console.warn('Static frontend not found at', distPath, '- skipping static hosting');
