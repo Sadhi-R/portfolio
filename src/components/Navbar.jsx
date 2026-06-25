@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 
@@ -17,6 +17,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobileMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 80);
@@ -70,6 +71,32 @@ const Navbar = ({ theme, onToggleTheme }) => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!toggle) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (!mobileMenuRef.current?.contains(event.target)) {
+        setToggle(false);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setToggle(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown, { passive: true });
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [toggle]);
 
   const getNavLinkClass = (title) =>
     `nav-link${active === title ? " nav-link-active" : ""}`;
@@ -147,7 +174,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
           {themeButton}
         </div>
 
-        <div className='flex flex-1 items-center justify-end gap-3 lg:hidden'>
+        <div ref={mobileMenuRef} className='flex flex-1 items-center justify-end gap-3 lg:hidden'>
           {themeButton}
           <button
             type='button'
@@ -161,7 +188,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
           <div
             className={`${
               !toggle ? "hidden" : "flex"
-            } absolute right-5 top-16 my-2 min-w-[210px] rounded-lg border border-[var(--border-color)] bg-[var(--surface-bg)]/95 p-5 shadow-card backdrop-blur-md sm:right-8`}
+            } absolute right-5 top-16 my-2 min-w-[210px] rounded-xl border border-[color:color-mix(in_srgb,var(--accent)_22%,var(--border-color))] bg-[color:color-mix(in_srgb,var(--card-bg)_96%,black)] p-5 shadow-[0_20px_45px_color-mix(in_srgb,var(--shadow-color)_85%,transparent)] backdrop-blur-xl sm:right-8`}
           >
             <ul className='flex list-none flex-1 flex-col items-start justify-end gap-2'>
               {navLinks.map((nav) => (
