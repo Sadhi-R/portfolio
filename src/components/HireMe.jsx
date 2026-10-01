@@ -1,14 +1,14 @@
 import { FiDownload, FiMail, FiMapPin } from "react-icons/fi";
 
 import { sadhi2 } from "../assets";
-import resumeFile from "../assets/Updated-Resume.pdf";
+import resumeFile from "../assets/New-Updated-Resume-Sadhi.pdf";
 import { SectionWrapper } from "../hoc";
 
 const highlights = [
-  "Full-stack development with Flutter, React.js, Java, and Node.js",
-  "AI-driven development and workflow automation (D3E platform)",
-  "RESTful APIs, microservices, and database optimization (PostgreSQL, MongoDB)",
-  "End-to-end ownership from requirements to deployment with CI/CD",
+  "Full-stack development with React, Next.js, TypeScript, Flutter, Java, and Node.js",
+  "AI/ML & generative AI — prompting, RAG, vector search, custom agents, and MCP tools",
+  "AI-assisted software generation on the D3E platform (prompt → complete applications)",
+  "Production systems with REST APIs, PostgreSQL, Docker, and CI/CD ownership",
 ];
 
 const HireMe = () => {
@@ -27,7 +27,7 @@ const HireMe = () => {
         <div className='mt-4 rounded-lg border border-[var(--border-color)] bg-[var(--card-bg)] p-4'>
           <div className='flex items-center gap-2 text-sm font-medium text-secondary'>
             <FiMapPin className='text-[var(--accent)]' aria-hidden='true' />
-            Open to remote and on-site opportunities
+            Open to hybrid, remote, and on-site roles
           </div>
         </div>
       </div>
@@ -38,8 +38,8 @@ const HireMe = () => {
           Hire Me
         </h2>
         <p className='mt-4 max-w-2xl text-base leading-7 text-secondary sm:text-[17px]'>
-          I help teams ship performant, maintainable products with thoughtful UX and dependable engineering.
-          If you need a software engineer who can understand requirements, own features, and deliver polished work,
+          Software engineer with 4+ years building full-stack apps, AI-driven platforms, and production systems.
+          If you need someone who can own features end-to-end — from React/Next.js and Flutter to AI/ML workflows —
           I&apos;d be glad to talk.
         </p>
 

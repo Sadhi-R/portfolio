@@ -9,16 +9,16 @@ const aiInterests = [
   {
     title: "AI Tools Expertise",
     description:
-      "Exploring and applying practical AI tools to improve productivity, experimentation, and development workflows.",
+      "Hands-on with ChatGPT, Claude, Gemini, and Cursor — plus MCP tools, custom agents, and AI-assisted development workflows.",
     Icon: FiCpu,
     accent: "from-[var(--accent)] to-[#a855f7]",
     span: "lg:col-span-2",
     featured: true,
   },
   {
-    title: "Development Acceleration",
+    title: "Generative AI & RAG",
     description:
-      "Using AI-assisted workflows for code generation, testing support, refactoring, and faster iteration.",
+      "Building with prompting, code generation, vector search, embeddings, and Retrieval-Augmented Generation in production systems.",
     Icon: FiZap,
     accent: "from-[var(--success)] to-[#22d3ee]",
     span: "",
@@ -27,7 +27,7 @@ const aiInterests = [
   {
     title: "Technology Innovation",
     description:
-      "Continuously learning emerging technologies and adapting them into useful, maintainable software solutions.",
+      "Continuously adopting AI/ML and modern stacks — React, Next.js, Flutter, PyTorch — into maintainable software solutions.",
     Icon: FiTrendingUp,
     accent: "from-[#6366f1] to-[var(--accent)]",
     span: "",
@@ -37,19 +37,19 @@ const aiInterests = [
 
 const aiTools = [
   "Cursor",
-  "GitHub Copilot",
   "ChatGPT",
   "Claude",
   "Gemini",
-  "D3E Platform",
-  "LangChain",
+  "OpenAI",
+  "MCP Tools",
+  "RAG / Vector Search",
   "Prompt Engineering",
 ];
 
 const aiStats = [
   { value: "AI-First", label: "Development approach" },
   { value: "D3E", label: "NL-to-app platform" },
-  { value: "3+", label: "Years shipping products" },
+  { value: "4+", label: "Years shipping products" },
 ];
 
 const AITechnology = () => {

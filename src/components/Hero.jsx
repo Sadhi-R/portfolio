@@ -9,9 +9,9 @@ import { fadeIn, staggerContainer } from "../utils/motion";
 import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
 
 const heroStats = [
-  { value: "3+", label: "Years Experience" },
+  { value: "4+", label: "Years Experience" },
   { value: "15+", label: "Projects Delivered" },
-  { value: "1,000+", label: "Users Served" },
+  { value: "AI/ML", label: "GenAI Focus" },
 ];
 
 const TiltPortrait = ({ children }) => {
@@ -81,8 +81,8 @@ const Hero = () => {
             variants={fadeIn("up", "spring", 0.2, 0.9)}
             className={`${styles.heroSubText} mt-5 max-w-2xl text-secondary`}
           >
-            Software engineer focused on React, Java, Flutter, and practical product delivery. I build clean,
-            scalable applications that feel polished for users and reliable for teams.
+            Software engineer focused on full-stack development, AI/ML, and generative AI. I build clean,
+            scalable applications with React, Next.js, Flutter, and AI-assisted workflows.
           </motion.p>
 
           <motion.div variants={fadeIn("up", "spring", 0.3, 0.9)} className='mt-8 flex flex-col gap-3 xs:flex-row'>

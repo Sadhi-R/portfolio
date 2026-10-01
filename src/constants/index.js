@@ -20,21 +20,16 @@ import {
   cursor,
   postgresql,
   d3eproject,
-  eventSphereProject,
   findNOK,
-  hostelproproject,
   rewahrproject,
-  syllabusmanagemenProject,
   LeadProject,
   rmsProject,
   digitalMenu,
   CaseManagementSystem,
-  ServiceEdge,
 } from "../assets";
 
 import d3eLogo from "../assets/company/d3e-logo.jpeg";
 import nityaLogo from "../assets/company/nitya-software-logo.png";
-import sunglareLogo from "../assets/company/sunglare-logo.jpeg";
 
 export const navLinks = [
   {
@@ -65,15 +60,15 @@ const services = [
     icon: web,
   },
   {
-    title: "Flutter Developer",
+    title: "AI Developer",
     icon: mobile,
   },
   {
-    title: "React Developer",
+    title: "Full Stack Development",
     icon: backend,
   },
   {
-    title: "Software Builder",
+    title: "Software Engineering",
     icon: creator,
   },
 ];
@@ -149,16 +144,17 @@ const technologies = [
 const experiences = [
   {
     title: "Software Engineer",
-    company_name: "D3E Studio",
+    company_name: "D3E Studio Private Limited",
     icon: d3eLogo,
     iconBg: "#ffffff",
     date: "Sep 2025 - Present",
     points: [
-      "Architecting and developing D3E (Design Develop Deploy), a revolutionary AI-powered platform that generates complete software applications from a single natural-language prompt.",
-      "Implementing advanced AI models and prompt-engineering techniques to automate code generation, reducing development time by up to 80%.",
-      "Building scalable microservices architecture to support multi-tenant application deployment and management.",
-      "Collaborating with cross-functional teams to integrate AI capabilities into production-grade software systems.",
-      "Establishing best practices for AI-driven development workflows and automated testing pipelines.",
+      "Develop AI-powered software-generation capabilities that transform natural-language prompts into complete software applications.",
+      "Implement AI-assisted code-generation workflows and prompt-engineering techniques that reduced development time by 80%.",
+      "Contribute to scalable application architecture, multi-tenant deployment workflows, automated testing, and production integrations.",
+      "Develop and maintain React/TypeScript and Dart/Flutter code-generation capabilities within the D3E Studio model-driven development platform.",
+      "Apply AI tools, prompting techniques, MCP-based workflows, and AI-assisted development practices to improve software engineering productivity.",
+      "Collaborate with cross-functional teams to integrate AI capabilities into production-grade software systems.",
     ],
   },
   {
@@ -168,23 +164,12 @@ const experiences = [
     iconBg: "#ffffff",
     date: "Aug 2022 - Sep 2025",
     points: [
-      "Developed and maintained 5+ client-facing applications using Flutter and React.js, ensuring adherence to industry standards and client specifications.",
-      "Led the full software development lifecycle from requirements gathering to deployment, improving delivery efficiency by 40%.",
-      "Designed and implemented RESTful APIs and integrated third-party services to enhance application functionality.",
-      "Collaborated with cross-functional teams of 5–10 members to deliver high-quality software solutions on schedule.",
-      "Optimized application performance through code refactoring and database query optimization, reducing load times by 35%.",
-      "Mentored junior developers on best coding practices, code reviews, and modern frameworks.",
-    ],
-  },
-  {
-    title: "Fiber Technician (Industrial Training)",
-    company_name: "SUNGLARE TECHNOLOGIES PVT LTD",
-    icon: sunglareLogo,
-    iconBg: "#ffffff",
-    date: "Jan 2022 - Jul 2022",
-    points: [
-      "Completed comprehensive industrial training in Optical Fiber technology, gaining practical technical expertise.",
-      "Developed strong problem-solving skills and attention to detail through hands-on infrastructure work.",
+      "Developed and maintained 5+ client-facing applications using Flutter and React.js across the full software development lifecycle.",
+      "Improved delivery efficiency by 40% through structured development workflows and automation.",
+      "Designed RESTful APIs and integrated third-party services to extend application functionality.",
+      "Optimized application and database performance, reducing application load times by 35%.",
+      "Collaborated with cross-functional teams of 5–10 members to deliver production software and resolve technical issues.",
+      "Mentored junior developers through code reviews, technical guidance, and software engineering best practices.",
     ],
   },
 ];
@@ -192,14 +177,14 @@ const experiences = [
 const educations = [
   {
     degree: "Bachelor of Technology — Computer Science",
-    school: "Sri Chaitanya Technical Campus (AICTE Approved), Hyderabad",
+    school: "Sri Chaitanya Technical Campus, Hyderabad, Telangana",
     date: "Oct 2022 - Jul 2025",
     description:
-      "Pursued B.Tech via Lateral Entry (TS ECET) while working full-time as a Software Engineer — an AICTE-approved pathway for Diploma holders entering directly into the second year.",
+      "Admitted after Diploma in ECE via Lateral Entry (TS ECET) — a 3-year AICTE-approved pathway. Pursued B.Tech while working full-time as a Software Engineer.",
   },
   {
     degree: "Diploma — Electronics & Communications Engineering",
-    school: "Government Model Residential Polytechnic, Gajwel",
+    school: "Government Model Residential Polytechnic, Gajwel, Telangana",
     date: "Jun 2019 - May 2022",
     description:
       "Built a strong foundation in core electronics, communication systems, and practical, hands-on engineering skills.",
@@ -207,109 +192,100 @@ const educations = [
 ];
 
 const achievements = [
-  "Received a Certificate of Appreciation from the President & CEO of D3E Studio for exceptional contributions and technical excellence.",
-  "Pioneered an AI-driven application-generation platform that enables non-technical users to create functional software.",
-  "Delivered 15+ production applications serving 1,000+ users with 99.5% uptime.",
-  "Reduced development cycle time by 40% through automated workflows and CI/CD pipelines.",
+  "Received a Certificate of Appreciation from the President and CEO of D3E Studio for exceptional contributions and technical excellence.",
+  "Contributed to an AI-driven application-generation platform enabling non-technical users to create functional software.",
+  "Conducted AI Tools Awareness Classes covering practical adoption of ChatGPT, Claude, Gemini, and Cursor.",
 ];
 
 const projects = [
   {
-    name: "D3E Studio - Low-Code Development Platform",
+    name: "D3E Studio - Low-Code Platform",
     description:
-      "A low-code platform designed to build and deploy cross-platform applications with minimal coding. It supports end-to-end workflows from UI design to backend integrations.",
-    tags: [],
+      "Contributed to the D3E Studio low-code development platform with React and Dart code-generation for models, components, pages, and application logic. Built and maintained Studio components, UI definitions, templates, and generated application structures with frontend–backend integration.",
+    tags: [
+      { name: "React", color: "blue-text-gradient" },
+      { name: "TypeScript", color: "green-text-gradient" },
+      { name: "Flutter", color: "pink-text-gradient" },
+    ],
     image: d3eproject,
+    source_code_link: "https://github.com/",
+    height: "500px",
+  },
+  {
+    name: "D3E AI Website Builder",
+    description:
+      "AI-assisted website generation platform that converts natural-language business requirements into multi-page websites. Features a registry-driven architecture with reusable components, themes, industry templates, design tokens, PostgreSQL auth, Stripe billing, OAuth, previews, and deployment workflows.",
+    tags: [
+      { name: "Next.js", color: "blue-text-gradient" },
+      { name: "OpenAI", color: "green-text-gradient" },
+      { name: "PostgreSQL", color: "pink-text-gradient" },
+    ],
+    image: digitalMenu,
+    source_code_link: "https://github.com/",
+    height: "500px",
+  },
+  {
+    name: "Restaurant Management & AI Virtual Human",
+    description:
+      "Full-stack restaurant platform covering orders, menus, reservations, inventory, employees, reporting, and payments with offline-first SQLite edge sync to cloud PostgreSQL. Built an AI reception kiosk with MCP, voice interaction, and a GPU-accelerated virtual human using MuseTalk, SadTalker, Wav2Lip, and CUDA.",
+    tags: [
+      { name: "React", color: "blue-text-gradient" },
+      { name: "PyTorch", color: "green-text-gradient" },
+      { name: "MCP", color: "pink-text-gradient" },
+    ],
+    image: rmsProject,
+    source_code_link: "https://github.com/",
+    height: "500px",
+  },
+  {
+    name: "Semantic Image Search Platform",
+    description:
+      "Semantic image search using CLIP embeddings and cosine-similarity ranking for natural-language image retrieval. Includes image ingestion, 512-dimensional embeddings, Qdrant vector indexing, metadata filtering, async processing, batching, caching, and request deduplication.",
+    tags: [
+      { name: "FastAPI", color: "blue-text-gradient" },
+      { name: "OpenCLIP", color: "green-text-gradient" },
+      { name: "Qdrant", color: "pink-text-gradient" },
+    ],
+    image: findNOK,
+    source_code_link: "https://github.com/",
+    height: "500px",
+  },
+  {
+    name: "FLUX.2 AI Image Generation Lab",
+    description:
+      "Prompt-to-image generation app with multi-reference image editing supporting up to 10 reference images. Optimized GPU inference using 4-bit NF4 quantization, CPU offloading, and Diffusers group offloading; deployed on a rented Vast.ai GPU.",
+    tags: [
+      { name: "Python", color: "blue-text-gradient" },
+      { name: "FLUX.2", color: "green-text-gradient" },
+      { name: "CUDA", color: "pink-text-gradient" },
+    ],
+    image: CaseManagementSystem,
+    source_code_link: "https://github.com/",
+    height: "500px",
+  },
+  {
+    name: "FreshMart Inventory Management",
+    description:
+      "Multi-tenant inventory platform for product catalogs, warehouses, procurement, stock movements, sales, returns, batch/expiry tracking, alerts, and reporting. Built with REST APIs, JWT/OTP auth, RBAC, audit logging, WebSocket notifications, Flyway migrations, and Docker deployment.",
+    tags: [
+      { name: "Spring Boot", color: "blue-text-gradient" },
+      { name: "React", color: "green-text-gradient" },
+      { name: "Docker", color: "pink-text-gradient" },
+    ],
+    image: LeadProject,
     source_code_link: "https://github.com/",
     height: "500px",
   },
   {
     name: "RewaHR - HR Management Portal",
     description:
-      "A full-featured portal designed to streamline HR operations such as attendance, payroll, leave management, and employee tracking. It provides secure, role-based access and real-time reporting dashboards for HR teams.",
-    tags: [],
+      "Full-featured HR management portal for attendance, payroll, leave management, and employee tracking. Implements secure role-based access for different organizational responsibilities and real-time reporting dashboards for workforce visibility.",
+    tags: [
+      { name: "Java", color: "blue-text-gradient" },
+      { name: "Flutter", color: "green-text-gradient" },
+      { name: "React", color: "pink-text-gradient" },
+    ],
     image: rewahrproject,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "Lead Management System",
-    description:
-      "A tool built for sales teams to manage client interactions and track lead stages. Automates lead fetching and reduces manual input while improving team productivity. Includes features like call logging, status tracking, and performance dashboards.",
-    tags: [],
-    image: LeadProject,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "FindNok - Next of Kin Web App",
-    description:
-      "A secure web app that helps users store and manage next of kin information. Users can update, view, and map family relationships easily within the platform. Designed for simplicity, security, and accessibility.",
-    tags: [],
-    image: findNOK,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "Hostel Management App",
-    description:
-      "A mobile application to handle hostel operations such as room allotments, attendance, and complaint tracking. Includes real-time notifications and admin-student communication features.",
-    tags: [],
-    image: hostelproproject,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "Restaurant Management System",
-    description:
-      "Web platform to manage restaurant operations including menus, orders, and kitchen workflows. Allows staff to process orders live and monitor kitchen updates efficiently.",
-    tags: [],
-    image: rmsProject,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "Syllabus Management System",
-    description:
-      "A system for colleges to manage and share academic syllabi by course and department. Faculty can easily update content while students get structured access. Improves transparency and simplifies academic coordination.",
-    tags: [],
-    image: syllabusmanagemenProject,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "ServiceEdge - Home Service Booking App",
-    description:
-      "An app for booking home services like electrical repairs, plumbing, and appliance maintenance. Customers can schedule appointments, and vendors manage bookings through a dashboard.",
-    tags: [],
-    image: ServiceEdge,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "Case Management System",
-    description:
-      "Platform to manage and track legal or client cases from start to finish. Supports secure record keeping, task assignment, and status updates. Improves team collaboration with logs, notifications, and user roles.",
-    tags: [],
-    image: CaseManagementSystem,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "DWS Event Sphere - Event Calendar App",
-    description:
-      "A calendar-based app for scheduling and discovering events with RSVP functionality. Users can explore upcoming events, set reminders, and filter by category.",
-    tags: [],
-    image: eventSphereProject,
-    source_code_link: "https://github.com/",
-    height: "500px",
-  },
-  {
-    name: "Digital Menu Project",
-    description:
-      "A digital menu platform for restaurants to showcase food items with images, pricing, and availability. Customers can scan a QR code to view the live menu and place orders.",
-    tags: [],
-    image: digitalMenu,
     source_code_link: "https://github.com/",
     height: "500px",
   },

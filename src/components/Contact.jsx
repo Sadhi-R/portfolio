@@ -104,7 +104,7 @@ const Contact = () => {
         </p>
         <div className='contact-location-chip mx-auto mt-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm text-secondary'>
           <FiMapPin className='shrink-0 text-[var(--accent)]' aria-hidden='true' />
-          Based in India · Open to remote & on-site
+          Hyderabad, India · Open to hybrid, remote & on-site
         </div>
       </motion.div>
 
